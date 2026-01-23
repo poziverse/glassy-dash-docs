@@ -1,0 +1,103 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'GLASSYDASH/docs/**'
+      - 'README.md'
+      - 'QUICKSTART.md'
+      - 'SUPPORT.md'
+      - 'CHANGELOG.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          cd GLASSYDASH
+          npm ci
+
+      - name: Build Documentation Site
+        run: |
+          echo "Building documentation site..."
+          # Copy documentation files to pages output
+          mkdir -p _site
+          cp README.md _site/index.md
+          cp QUICKSTART.md _site/quickstart.md
+          cp SUPPORT.md _site/support.md
+          cp CHANGELOG.md _site/changelog.md
+          cp LICENSE.md _site/license.md
+          cp CODE_OF_CONDUCT.md _site/code-of-conduct.md
+          
+          # Copy docs directory
+          mkdir -p _site/docs
+          cp -r GLASSYDASH/docs/* _site/docs/
+          
+          # Create documentation index
+          echo "# GLASSYDASH Documentation" > _site/docs/index.md
+          echo "" >> _site/docs/index.md
+          echo "## Quick Links" >> _site/docs/index.md
+          echo "- [Quick Start](../quickstart.md)" >> _site/docs/index.md
+          echo "- [User Guide](user/GETTING_STARTED.md)" >> _site/docs/index.md
+          echo "- [Developer Guide](dev/SETUP.md)" >> _site/docs/index.md
+          echo "- [API Reference](api/README.md)" >> _site/docs/index.md
+          echo "- [Admin Guide](admin/INSTALLATION.md)" >> _site/docs/index.md
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Report Deployment Status
+        if: success()
+        run: |
+          echo "🚀 Documentation deployed successfully!"
+          echo "URL: ${{ steps.deployment.outputs.page_url }}"
+
+      - name: Comment on Issue (if triggered manually)
+        if: github.event_name == 'workflow_dispatch' && github.event.issue != null
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Documentation has been deployed!\n\n🔗 View at: ${{ steps.deployment.outputs.page_url }}'
+            })
