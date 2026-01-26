@@ -6,9 +6,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased]
+## [0.67.1] - 2026-01-25
+
+### Added
+
+- 🚀 **New GlassyDocs Grid Interface**
+  - Grid-based document management by default
+  - Prominent "New Document" button for quick creation
+- 🚀 **Enhanced Voice Studio Gallery**
+  - Grid-based recording history with AI summaries
+  - Native "View in Notes" integration for easy management
+- 🚀 **Recording Studio Focus Mode**
+  - Dedicated recording overlay for undistracted voice capture
+  - High-fidelity visualizer with optimized rendering
+
+### Fixed
+
+- 🐛 UX: Removed document auto-selection to provide better overview on landing
+- 🎨 UI: Improved layout consistency between Docs, Voice, and Notes views
+- 🎨 UI: Standardized action buttons for creation tasks across the workspace
+
+### Fixed
+
+- 🐛 Bug: Note cards truncated at 6 lines with line-clamp
+- 🐛 Bug: Note content overflow not scrollable in dark/light modes
+- 🐛 Bug: Clicking note cards doesn't open note in composer
+- 🎨 UI: Added proper CSS overflow handling for note-content
+- 🎨 UI: Removed line-clamp-6 restriction from note cards
+- 🎨 UI: Fixed NoteCard click handler to properly open notes
 
 ### Planned Features
+
 - Multi-language support (Spanish, Chinese)
 - Enhanced AI with larger models
 - Mobile app (React Native)
@@ -20,6 +48,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [0.67.0] - 2026-01-23 (Beta)
 
 ### Added
+
 - 🎨 **Advanced Theming System**
   - Theme presets (Neon Tokyo, Zen Garden, etc.)
   - Custom background library (Mobile/Desktop/4K optimized)
@@ -84,6 +113,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Emoji icons for note types
 
 ### Changed
+
 - 🔄 **Architecture Refactor**
   - Migrated to React 18
   - Updated to Vite 5.x
@@ -96,6 +126,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Service worker implementation
 
 ### Fixed
+
 - 🐛 Bug: Checklist items not persisting on save
 - 🐛 Bug: Tag chips not rendering properly on overflow
 - 🐛 Bug: Images not compressing on upload
@@ -104,18 +135,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 🐛 Bug: Drag-and-drop not working on mobile
 
 ### Security
+
 - 🔒 Security: Updated JWT secret handling
 - 🔒 Security: Added CORS protection
 - 🔒 Security: Enhanced password hashing
 - 🔒 Security: SQL injection prevention
 
 ### Performance
+
 - ⚡ Performance: Optimized image compression
 - ⚡ Performance: Reduced bundle size by 40%
 - ⚡ Performance: Debounced search input
 - ⚡ Performance: Virtualized note list (in progress)
 
 ### Documentation
+
 - 📚 Documentation: Comprehensive user guides
 - 📚 Documentation: Developer documentation
 - 📚 Documentation: API reference
@@ -127,6 +161,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [0.66.0] - 2026-01-15
 
 ### Added
+
 - ✨ Markdown support with formatting toolbar
 - ✨ Checklists with drag-to-reorder
 - ✨ Image attachments with compression
@@ -135,6 +170,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - ✨ Server-Sent Events (SSE) for real-time updates
 
 ### Fixed
+
 - 🐛 Bug: Notes not syncing across devices
 - 🐛 Bug: Login session expiring too quickly
 
@@ -143,12 +179,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [0.65.0] - 2026-01-08
 
 ### Added
+
 - ✨ Multi-user authentication system
 - ✨ User registration
 - ✨ Admin panel basic features
 - ✨ Database schema with migrations
 
 ### Changed
+
 - 🔄 Migrated from local storage to SQLite
 - 🔄 Implemented user isolation
 
@@ -157,6 +195,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [0.60.0] - 2026-01-01
 
 ### Added
+
 - ✨ Initial release of GLASSYDASH
 - ✨ Basic note creation
 - ✨ Markdown editor
@@ -176,6 +215,7 @@ GLASSYDASH follows [Semantic Versioning 2.0.0](https://semver.org/):
 ### Beta Releases
 
 Beta versions (0.x.x) may have:
+
 - Breaking changes
 - Unstable features
 - Experimental functionality
@@ -187,27 +227,35 @@ Beta versions (0.x.x) may have:
 ## Categories
 
 ### Added
+
 New features and enhancements
 
 ### Changed
+
 Changes to existing functionality
 
 ### Deprecated
+
 Soon-to-be removed features
 
 ### Removed
+
 Removed features
 
 ### Fixed
+
 Bug fixes
 
 ### Security
+
 Security updates and fixes
 
 ### Performance
+
 Performance improvements
 
 ### Documentation
+
 Documentation updates
 
 ---

@@ -1,7 +1,7 @@
 # Component Guide
 
-**Version:** ALPHA 1.0  
-**Last Updated:** January 19, 2026
+**Version:** 1.1  
+**Last Updated:** January 24, 2026
 
 ---
 
@@ -40,14 +40,13 @@ import { LoginView, RegisterView } from './components/AuthViews';
 
 ### NotesView
 
-Main dashboard view for displaying and managing notes.
+Main dashboard view for displaying and managing notes with proper content overflow handling.
 
 **Usage:**
 
 ```jsx
-import { NotesView } from './components/NotesView'
-
-;<NotesView />
+import { NotesView } from "./components/NotesView";
+<NotesView />;
 ```
 
 **Features:**
@@ -56,6 +55,15 @@ import { NotesView } from './components/NotesView'
 - Search and filter
 - Multi-select support
 - Drag-and-drop reordering
+- **CSS overflow handling for note content (v1.1+)**
+- **Scrollable note cards without artificial truncation (v1.1+)**
+
+**Recent Updates (v1.1):**
+
+- Added proper CSS overflow handling for `.note-content` class
+- Configured max-height constraints for dark/light modes
+- Ensures scrollable content within note cards
+- Removed reliance on line-clamp from child components
 
 ---
 
@@ -66,9 +74,8 @@ Administrative panel for user and system management.
 **Usage:**
 
 ```jsx
-import { AdminView } from './components/AdminView'
-
-;<AdminView />
+import { AdminView } from "./components/AdminView";
+<AdminView />;
 ```
 
 **Features:**
@@ -94,11 +101,10 @@ Application shell containing sidebar and main content area.
 **Usage:**
 
 ```jsx
-import { DashboardLayout } from './components/DashboardLayout'
-
-;<DashboardLayout showSidebar={true}>
+import { DashboardLayout } from "./components/DashboardLayout";
+<DashboardLayout showSidebar={true}>
   <NotesGrid />
-</DashboardLayout>
+</DashboardLayout>;
 ```
 
 ---
@@ -128,9 +134,11 @@ Search and filter input for notes.
 **Usage:**
 
 ```jsx
-import { SearchBar } from './components/SearchBar'
-
-;<SearchBar onSearch={query => console.log(query)} placeholder="Search notes..." />
+import { SearchBar } from "./components/SearchBar";
+<SearchBar
+  onSearch={(query) => console.log(query)}
+  placeholder="Search notes..."
+/>;
 ```
 
 ---
@@ -139,38 +147,45 @@ import { SearchBar } from './components/SearchBar'
 
 ### NoteCard
 
-Individual note display component.
+Individual note display component with proper click handling and content overflow management.
 
 **Props:**
 
 ```typescript
 interface NoteCardProps {
-  note: Note
-  onClick: (noteId: number) => void
-  onEdit: (noteId: number) => void
-  onDelete: (noteId: number) => void
-  onPin: (noteId: number, pinned: boolean) => void
-  onArchive: (noteId: number, archived: boolean) => void
-  selected?: boolean
-  onToggleSelect?: (noteId: number) => void
+  note: Note;
+  onClick: (noteId: number) => void;
+  onEdit: (noteId: number) => void;
+  onDelete: (noteId: number) => void;
+  onPin: (noteId: number, pinned: boolean) => void;
+  onArchive: (noteId: number, archived: boolean) => void;
+  selected?: boolean;
+  onToggleSelect?: (noteId: number) => void;
 }
 ```
+
+**Recent Updates (v1.1):**
+
+- Fixed click handler to properly open notes in composer
+- Removed line-clamp-6 restriction for full content display
+- Content overflow now managed by parent NotesView component
+- Improved event propagation handling for better UX
+- **Added Framer Motion spring animations for fluid interaction (v1.1.4)**
 
 **Usage:**
 
 ```jsx
-import { NoteCard } from './components/NoteCard'
-
-;<NoteCard
+import { NoteCard } from "./components/NoteCard";
+<NoteCard
   note={note}
-  onClick={id => openNote(id)}
-  onEdit={id => editNote(id)}
-  onDelete={id => deleteNote(id)}
+  onClick={(id) => openNote(id)}
+  onEdit={(id) => editNote(id)}
+  onDelete={(id) => deleteNote(id)}
   onPin={(id, pinned) => togglePin(id, pinned)}
   onArchive={(id, archived) => toggleArchive(id, archived)}
   selected={selectedNotes.includes(note.id)}
-  onToggleSelect={id => toggleSelect(id)}
-/>
+  onToggleSelect={(id) => toggleSelect(id)}
+/>;
 ```
 
 **Note Types:**
@@ -189,17 +204,16 @@ Quick note creation widget.
 
 ```typescript
 interface ComposerProps {
-  onCreate: (note: Partial<Note>) => void
-  defaultType?: 'text' | 'checklist' | 'draw'
+  onCreate: (note: Partial<Note>) => void;
+  defaultType?: "text" | "checklist" | "draw";
 }
 ```
 
 **Usage:**
 
 ```jsx
-import { Composer } from './components/Composer'
-
-;<Composer onCreate={note => createNote(note)} defaultType="text" />
+import { Composer } from "./components/Composer";
+<Composer onCreate={(note) => createNote(note)} defaultType="text" />;
 ```
 
 ---
@@ -207,6 +221,7 @@ import { Composer } from './components/Composer'
 ### SettingsPanel
 
 User preferences and settings configuration.
+**Note:** Internal tabs are modularized (e.g., `AppearanceSettings`).
 
 **Features:**
 
@@ -215,7 +230,7 @@ User preferences and settings configuration.
 - Accent color picker
 - Card transparency
 - Theme customization
-- Background selection
+- Background selection & **Custom Uploads**
 - Accent color picker
 - Card transparency
 - Overlay opacity slider
@@ -224,9 +239,8 @@ User preferences and settings configuration.
 **Usage:**
 
 ```jsx
-import { SettingsPanel } from './components/SettingsPanel'
-
-;<SettingsPanel />
+import { SettingsPanel } from "./components/SettingsPanel";
+<SettingsPanel />;
 ```
 
 ---
@@ -246,14 +260,13 @@ Complex modal for note editing and configuration.
 **Usage:**
 
 ```jsx
-import { Modal } from './components/Modal'
-
-;<Modal
+import { Modal } from "./components/Modal";
+<Modal
   isOpen={isModalOpen}
   note={currentNote}
   onClose={() => setIsModalOpen(false)}
-  onSave={note => saveNote(note)}
-/>
+  onSave={(note) => saveNote(note)}
+/>;
 ```
 
 ---
@@ -266,25 +279,24 @@ Canvas component for drawing notes.
 
 ```typescript
 interface DrawingCanvasProps {
-  content: string // JSON string of drawing data
-  onChange: (content: string) => void
-  width?: number
-  height?: number
-  readOnly?: boolean
+  content: string; // JSON string of drawing data
+  onChange: (content: string) => void;
+  width?: number;
+  height?: number;
+  readOnly?: boolean;
 }
 ```
 
 **Usage:**
 
 ```jsx
-import { DrawingCanvas } from './components/DrawingCanvas'
-
-;<DrawingCanvas
+import { DrawingCanvas } from "./components/DrawingCanvas";
+<DrawingCanvas
   content={note.content}
-  onChange={content => updateNote({ content })}
+  onChange={(content) => updateNote({ content })}
   width={800}
   height={600}
-/>
+/>;
 ```
 
 ---
@@ -297,25 +309,24 @@ Single checklist item component.
 
 ```typescript
 interface ChecklistRowProps {
-  item: ChecklistItem
-  onToggle: (itemId: string) => void
-  onDelete?: (itemId: string) => void
-  onEdit?: (itemId: string, text: string) => void
-  readOnly?: boolean
+  item: ChecklistItem;
+  onToggle: (itemId: string) => void;
+  onDelete?: (itemId: string) => void;
+  onEdit?: (itemId: string, text: string) => void;
+  readOnly?: boolean;
 }
 ```
 
 **Usage:**
 
 ```jsx
-import { ChecklistRow } from './components/ChecklistRow'
-
-;<ChecklistRow
-  item={{ id: '1', text: 'Buy milk', done: false }}
-  onToggle={id => toggleItem(id)}
-  onDelete={id => deleteItem(id)}
+import { ChecklistRow } from "./components/ChecklistRow";
+<ChecklistRow
+  item={{ id: "1", text: "Buy milk", done: false }}
+  onToggle={(id) => toggleItem(id)}
+  onDelete={(id) => deleteItem(id)}
   onEdit={(id, text) => editItem(id, text)}
-/>
+/>;
 ```
 
 ---
@@ -328,17 +339,19 @@ Rich text formatting toolbar.
 
 ```typescript
 interface FormatToolbarProps {
-  onFormat: (format: string, value?: string) => void
-  visible?: boolean
+  onFormat: (format: string, value?: string) => void;
+  visible?: boolean;
 }
 ```
 
 **Usage:**
 
 ```jsx
-import { FormatToolbar } from './components/FormatToolbar'
-
-;<FormatToolbar onFormat={(format, value) => applyFormat(format, value)} visible={true} />
+import { FormatToolbar } from "./components/FormatToolbar";
+<FormatToolbar
+  onFormat={(format, value) => applyFormat(format, value)}
+  visible={true}
+/>;
 ```
 
 **Formats:**
@@ -363,28 +376,32 @@ Authentication state management.
 
 ```javascript
 {
-  ;(user, // Current user object
+  (user, // Current user object
     token, // JWT token
     login, // Login function
     register, // Register function
     logout, // Logout function
-    isAuthenticated) // Boolean
+    isAuthenticated); // Boolean
 }
 ```
 
 **Usage:**
 
 ```jsx
-import { useAuth } from './contexts/AuthContext'
+import { useAuth } from "./contexts/AuthContext";
 
 function MyComponent() {
-  const { user, login, logout, isAuthenticated } = useAuth()
+  const { user, login, logout, isAuthenticated } = useAuth();
 
   return (
     <div>
-      {isAuthenticated ? <p>Welcome, {user.username}!</p> : <button onClick={login}>Login</button>}
+      {isAuthenticated ? (
+        <p>Welcome, {user.username}!</p>
+      ) : (
+        <button onClick={login}>Login</button>
+      )}
     </div>
-  )
+  );
 }
 ```
 
@@ -422,34 +439,37 @@ Note CRUD and state management.
 **Usage:**
 
 ```jsx
-import { useNotes } from './contexts/NotesContext'
+import { useNotes } from "./contexts/NotesContext";
 
 function NotesManager() {
-  const { notes, createNote, deleteNote, selectedNotes, bulkDelete } = useNotes()
+  const { notes, createNote, deleteNote, selectedNotes, bulkDelete } =
+    useNotes();
 
   const handleCreate = () => {
     createNote({
-      type: 'text',
-      title: 'New Note',
-      content: '',
-    })
-  }
+      type: "text",
+      title: "New Note",
+      content: "",
+    });
+  };
 
   const handleBulkDelete = () => {
-    bulkDelete(selectedNotes)
-  }
+    bulkDelete(selectedNotes);
+  };
 
   return (
     <div>
       <button onClick={handleCreate}>Create Note</button>
-      {notes.map(note => (
+      {notes.map((note) => (
         <NoteCard key={note.id} note={note} />
       ))}
       {selectedNotes.length > 0 && (
-        <button onClick={handleBulkDelete}>Delete {selectedNotes.length} notes</button>
+        <button onClick={handleBulkDelete}>
+          Delete {selectedNotes.length} notes
+        </button>
       )}
     </div>
-  )
+  );
 }
 ```
 
@@ -463,7 +483,7 @@ User settings and preferences.
 
 ```javascript
 {
-  ;(dark, // Dark mode boolean
+  (dark, // Dark mode boolean
     setDark, // Toggle dark mode
     accentColor, // Accent color name
     setAccentColor, // Set accent color
@@ -479,28 +499,33 @@ User settings and preferences.
     setAlwaysShowSidebarOnWide, // Toggle sidebar
     localAiEnabled, // AI enabled boolean
     setLocalAiEnabled, // Toggle AI
-    settings) // All settings object
+    settings); // All settings object
 }
 ```
 
 **Usage:**
 
 ```jsx
-import { useSettings } from './contexts/SettingsContext'
+import { useSettings } from "./contexts/SettingsContext";
 
 function ThemeToggle() {
-  const { dark, setDark, accentColor, setAccentColor } = useSettings()
+  const { dark, setDark, accentColor, setAccentColor } = useSettings();
 
   return (
-    <div className={dark ? 'dark' : 'light'}>
-      <button onClick={() => setDark(!dark)}>{dark ? 'Light' : 'Dark'} Mode</button>
-      <select value={accentColor} onChange={e => setAccentColor(e.target.value)}>
+    <div className={dark ? "dark" : "light"}>
+      <button onClick={() => setDark(!dark)}>
+        {dark ? "Light" : "Dark"} Mode
+      </button>
+      <select
+        value={accentColor}
+        onChange={(e) => setAccentColor(e.target.value)}
+      >
         <option value="rose">Rose</option>
         <option value="blue">Blue</option>
         <option value="green">Green</option>
       </select>
     </div>
-  )
+  );
 }
 ```
 
@@ -563,26 +588,26 @@ Global UI state (toasts, dialogs).
 **Usage:**
 
 ```jsx
-import { useUI } from './contexts/UIContext'
+import { useUI } from "./contexts/UIContext";
 
 function DeleteButton() {
-  const { confirmDialog, clearConfirm } = useUI()
+  const { confirmDialog, clearConfirm } = useUI();
 
   const handleDelete = async () => {
     const confirmed = await confirmDialog({
-      title: 'Delete Note',
-      message: 'Are you sure you want to delete this note?',
-      confirmText: 'Delete',
+      title: "Delete Note",
+      message: "Are you sure you want to delete this note?",
+      confirmText: "Delete",
       danger: true,
-    })
+    });
 
     if (confirmed) {
-      deleteNote()
-      clearConfirm()
+      deleteNote();
+      clearConfirm();
     }
-  }
+  };
 
-  return <button onClick={handleDelete}>Delete</button>
+  return <button onClick={handleDelete}>Delete</button>;
 }
 ```
 
@@ -598,23 +623,22 @@ Global error boundary for catching errors.
 
 ```typescript
 interface ErrorBoundaryProps {
-  children: ReactNode
-  fallback?: ReactNode
-  onError?: (error: Error, errorInfo: ErrorInfo) => void
+  children: ReactNode;
+  fallback?: ReactNode;
+  onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }
 ```
 
 **Usage:**
 
 ```jsx
-import { ErrorBoundary } from './components/ErrorBoundary'
-
-;<ErrorBoundary
+import { ErrorBoundary } from "./components/ErrorBoundary";
+<ErrorBoundary
   fallback={<div>Something went wrong</div>}
-  onError={error => logger.error('component_error', { error })}
+  onError={(error) => logger.error("component_error", { error })}
 >
   <App />
-</ErrorBoundary>
+</ErrorBoundary>;
 ```
 
 ---
@@ -627,9 +651,9 @@ Color selection dot component.
 
 ```typescript
 interface ColorDotProps {
-  color: string
-  selected?: boolean
-  onClick?: (color: string) => void
+  color: string;
+  selected?: boolean;
+  onClick?: (color: string) => void;
 }
 ```
 
@@ -643,10 +667,10 @@ Popover/tooltip component.
 
 ```typescript
 interface PopoverProps {
-  children: ReactNode
-  content: ReactNode
-  position?: 'top' | 'bottom' | 'left' | 'right'
-  visible?: boolean
+  children: ReactNode;
+  content: ReactNode;
+  position?: "top" | "bottom" | "left" | "right";
+  visible?: boolean;
 }
 ```
 
@@ -661,13 +685,13 @@ Each component should have one clear purpose.
 ```jsx
 // Good: Single responsibility
 function NoteCard({ note, onClick }) {
-  return <div onClick={() => onClick(note.id)}>{note.title}</div>
+  return <div onClick={() => onClick(note.id)}>{note.title}</div>;
 }
 
 // Bad: Multiple responsibilities
 function NoteCardWithActions({ note }) {
   // Handles display, editing, deleting, sharing
-  return <div>...</div>
+  return <div>...</div>;
 }
 ```
 
@@ -692,11 +716,11 @@ function NoteCard({ note, onClick, selected = false }) {
 Use `memo` for expensive renders.
 
 ```jsx
-import { memo } from 'react'
+import { memo } from "react";
 
 const NoteCard = memo(({ note, onClick }) => {
-  return <div onClick={() => onClick(note.id)}>{note.title}</div>
-})
+  return <div onClick={() => onClick(note.id)}>{note.title}</div>;
+});
 ```
 
 ### 4. Callback Optimization
@@ -704,14 +728,14 @@ const NoteCard = memo(({ note, onClick }) => {
 Use `useCallback` for event handlers.
 
 ```jsx
-import { useCallback } from 'react'
+import { useCallback } from "react";
 
 function NoteCard({ note, onClick }) {
   const handleClick = useCallback(() => {
-    onClick(note.id)
-  }, [onClick, note.id])
+    onClick(note.id);
+  }, [onClick, note.id]);
 
-  return <div onClick={handleClick}>{note.title}</div>
+  return <div onClick={handleClick}>{note.title}</div>;
 }
 ```
 
@@ -731,9 +755,9 @@ Show loading indicators for async operations.
 
 ```jsx
 function NoteList({ notes, loading }) {
-  if (loading) return <Spinner />
-  if (notes.length === 0) return <EmptyState />
-  return notes.map(note => <NoteCard key={note.id} note={note} />)
+  if (loading) return <Spinner />;
+  if (notes.length === 0) return <EmptyState />;
+  return notes.map((note) => <NoteCard key={note.id} note={note} />);
 }
 ```
 
@@ -745,7 +769,7 @@ Include ARIA attributes and keyboard navigation.
 <button
   onClick={handleAction}
   aria-label="Delete note"
-  onKeyDown={e => e.key === 'Enter' && handleAction()}
+  onKeyDown={(e) => e.key === "Enter" && handleAction()}
 >
   Delete
 </button>
@@ -761,9 +785,9 @@ Include ARIA attributes and keyboard navigation.
 
 ```jsx
 function NoteListContainer() {
-  const { notes, loading, deleteNote } = useNotes()
+  const { notes, loading, deleteNote } = useNotes();
 
-  return <NoteList notes={notes} loading={loading} onDelete={deleteNote} />
+  return <NoteList notes={notes} loading={loading} onDelete={deleteNote} />;
 }
 ```
 
@@ -771,8 +795,10 @@ function NoteListContainer() {
 
 ```jsx
 function NoteList({ notes, loading, onDelete }) {
-  if (loading) return <Spinner />
-  return notes.map(note => <NoteCard key={note.id} note={note} onDelete={onDelete} />)
+  if (loading) return <Spinner />;
+  return notes.map((note) => (
+    <NoteCard key={note.id} note={note} onDelete={onDelete} />
+  ));
 }
 ```
 
@@ -780,21 +806,21 @@ function NoteList({ notes, loading, onDelete }) {
 
 ```jsx
 function Modal({ children, isOpen, onClose }) {
-  if (!isOpen) return null
+  if (!isOpen) return null;
   return (
     <div className="modal">
       <div className="modal-content">{children}</div>
       <button onClick={onClose}>Close</button>
     </div>
-  )
+  );
 }
 
-Modal.Header = ({ children }) => <div className="modal-header">{children}</div>
-Modal.Body = ({ children }) => <div className="modal-body">{children}</div>
-Modal.Footer = ({ children }) => <div className="modal-footer">{children}</div>
+Modal.Header = ({ children }) => <div className="modal-header">{children}</div>;
+Modal.Body = ({ children }) => <div className="modal-body">{children}</div>;
+Modal.Footer = ({ children }) => <div className="modal-footer">{children}</div>;
 
 // Usage
-;<Modal isOpen={isOpen} onClose={onClose}>
+<Modal isOpen={isOpen} onClose={onClose}>
   <Modal.Header>Edit Note</Modal.Header>
   <Modal.Body>
     <textarea />
@@ -802,7 +828,7 @@ Modal.Footer = ({ children }) => <div className="modal-footer">{children}</div>
   <Modal.Footer>
     <button>Save</button>
   </Modal.Footer>
-</Modal>
+</Modal>;
 ```
 
 ---
@@ -812,38 +838,38 @@ Modal.Footer = ({ children }) => <div className="modal-footer">{children}</div>
 ### Unit Test Example
 
 ```jsx
-import { render, screen, fireEvent } from '@testing-library/react'
-import { NotesContext } from '../contexts/NotesContext'
-import NoteCard from '../NoteCard'
+import { render, screen, fireEvent } from "@testing-library/react";
+import { NotesContext } from "../contexts/NotesContext";
+import NoteCard from "../NoteCard";
 
-describe('NoteCard', () => {
-  const mockDeleteNote = jest.fn()
-  const mockNote = { id: 1, title: 'Test Note', type: 'text' }
+describe("NoteCard", () => {
+  const mockDeleteNote = jest.fn();
+  const mockNote = { id: 1, title: "Test Note", type: "text" };
 
-  const renderWithProvider = component => {
+  const renderWithProvider = (component) => {
     return render(
       <NotesContext.Provider value={{ deleteNote: mockDeleteNote }}>
         {component}
-      </NotesContext.Provider>
-    )
-  }
+      </NotesContext.Provider>,
+    );
+  };
 
-  it('renders note title', () => {
-    renderWithProvider(<NoteCard note={mockNote} />)
-    expect(screen.getByText('Test Note')).toBeInTheDocument()
-  })
+  it("renders note title", () => {
+    renderWithProvider(<NoteCard note={mockNote} />);
+    expect(screen.getByText("Test Note")).toBeInTheDocument();
+  });
 
-  it('calls delete on delete button click', () => {
-    renderWithProvider(<NoteCard note={mockNote} />)
-    fireEvent.click(screen.getByRole('button', { name: /delete/i }))
-    expect(mockDeleteNote).toHaveBeenCalledWith(1)
-  })
+  it("calls delete on delete button click", () => {
+    renderWithProvider(<NoteCard note={mockNote} />);
+    fireEvent.click(screen.getByRole("button", { name: /delete/i }));
+    expect(mockDeleteNote).toHaveBeenCalledWith(1);
+  });
 
-  it('shows selected state when selected', () => {
-    renderWithProvider(<NoteCard note={mockNote} selected={true} />)
-    expect(screen.getByRole('checkbox')).toBeChecked()
-  })
-})
+  it("shows selected state when selected", () => {
+    renderWithProvider(<NoteCard note={mockNote} selected={true} />);
+    expect(screen.getByRole("checkbox")).toBeChecked();
+  });
+});
 ```
 
 ---

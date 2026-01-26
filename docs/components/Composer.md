@@ -1,4 +1,5 @@
 # Composer Component
+
 **Last Updated:** January 21, 2026  
 **Version:** 1.0  
 **Status:** ✅ Production Ready
@@ -14,6 +15,7 @@
 ## Purpose
 
 Provide intuitive note creation interface with:
+
 - Three note types: Text, Checklist, Drawing
 - Rich text formatting for text notes
 - Image upload and preview
@@ -29,11 +31,13 @@ Provide intuitive note creation interface with:
 ## Key Responsibilities
 
 ### 1. Note Type Support
+
 - Text notes with formatting
 - Checklist notes with item management
 - Drawing notes with canvas
 
 ### 2. User Input
+
 - Title input
 - Content textarea (text type)
 - Checklist item input and list
@@ -41,12 +45,14 @@ Provide intuitive note creation interface with:
 - Tags input
 
 ### 3. Customization
+
 - Color picker
 - Image upload
 - Format toolbar (text type)
 - Type selection buttons
 
 ### 4. State Management
+
 - Collapsed/expanded state
 - Form inputs (title, content, tags)
 - Color selection
@@ -96,46 +102,49 @@ Composer
 ```javascript
 // Composer Context
 const {
-  type,                    // Note type (text/checklist/draw)
-  setType,                 // Set note type
-  title,                   // Note title
-  setTitle,               // Set title
-  content,                // Note content
-  setContent,             // Set content
-  tags,                   // Tags string
-  setTags,               // Set tags
-  color,                  // Note color
-  setColor,              // Set color
-  images,                // Attached images
-  collapsed,              // Collapsed state
-  setCollapsed,           // Toggle collapsed
-  clItems,               // Checklist items
-  clInput,                // Checklist input value
-  setClInput,             // Set checklist input
-  drawingData,            // Drawing paths
-  setDrawingData,        // Set drawing data
-  showFormatting,         // Format toolbar open
-  setShowFormatting,      // Toggle format toolbar
-  showColorPicker,        // Color picker open
-  setShowColorPicker,    // Toggle color picker
-  titleRef,               // Title input ref
-  contentRef,             // Content textarea ref
-  fileInputRef,           // File input ref
-  fmtBtnRef,              // Format button ref
-  colorBtnRef,            // Color button ref
-  addChecklistItem,        // Add checklist item
-  onKeyDown,             // Keydown handler
-  format,                // Format text handler
-  handleImageUpload,      // Image upload handler
-  removeImage,            // Remove image handler
-  save                    // Save note handler
-} = useComposer()
+  type, // Note type (text/checklist/draw)
+  setType, // Set note type
+  title, // Note title
+  setTitle, // Set title
+  content, // Note content
+  setContent, // Set content
+  tags, // Tags string
+  setTags, // Set tags
+  color, // Note color
+  setColor, // Set color
+  images, // Attached images
+  collapsed, // Collapsed state
+  setCollapsed, // Toggle collapsed
+  clItems, // Checklist items
+  clInput, // Checklist input value
+  setClInput, // Set checklist input
+  drawingData, // Drawing paths
+  setDrawingData, // Set drawing data
+  showFormatting, // Format toolbar open
+  setShowFormatting, // Toggle format toolbar
+  showColorPicker, // Color picker open
+  setShowColorPicker, // Toggle color picker
+  titleRef, // Title input ref
+  contentRef, // Content textarea ref
+  fileInputRef, // File input ref
+  fmtBtnRef, // Format button ref
+  colorBtnRef, // Color button ref
+  addChecklistItem, // Add checklist item
+  onKeyDown, // Keydown handler
+  format, // Format text handler
+  handleImageUpload, // Image upload handler
+  removeImage, // Remove image handler
+  save, // Save note handler
+} = useComposer();
 
 // Settings Context
-const { dark, cardTransparency } = useSettings()
+const { dark, cardTransparency } = useSettings();
 
 // Notes Context
-const { isOnline } = useNotes()
+const { isOnline } = useNotes();
+
+// UI Context
+const { showToast } = useUI();
 ```
 
 ---
@@ -161,6 +170,7 @@ const { isOnline } = useNotes()
 ```
 
 **Behavior:**
+
 - Shows warning message when offline
 - Disables all note creation
 - Provides clear visual feedback
@@ -186,6 +196,7 @@ const { isOnline } = useNotes()
 ```
 
 **Behavior:**
+
 - Shows single input field
 - Click to expand
 - Auto-focus title input after expansion
@@ -199,13 +210,14 @@ const { isOnline } = useNotes()
 <input
   ref={titleRef}
   value={title}
-  onChange={e => setTitle(e.target.value)}
+  onChange={(e) => setTitle(e.target.value)}
   placeholder="Title"
   className="w-full bg-transparent text-lg font-semibold placeholder-gray-500 focus:outline-none mb-2 p-2"
 />
 ```
 
 **Features:**
+
 - Transparent background
 - Large font size
 - Placeholder text
@@ -217,20 +229,23 @@ const { isOnline } = useNotes()
 ### 4. Text Editor
 
 ```javascript
-{type === 'text' && (
-  <textarea
-    ref={contentRef}
-    value={content}
-    onChange={e => setContent(e.target.value)}
-    onKeyDown={onKeyDown}
-    placeholder="Write a note..."
-    className="w-full bg-transparent placeholder-gray-500 focus:outline-none resize-none p-2"
-    rows={1}
-  />
-)}
+{
+  type === "text" && (
+    <textarea
+      ref={contentRef}
+      value={content}
+      onChange={(e) => setContent(e.target.value)}
+      onKeyDown={onKeyDown}
+      placeholder="Write a note..."
+      className="w-full bg-transparent placeholder-gray-500 focus:outline-none resize-none p-2"
+      rows={1}
+    />
+  );
+}
 ```
 
 **Features:**
+
 - Auto-resize (via useEffect)
 - Keyboard shortcuts (via onKeyDown)
 - Placeholder text
@@ -242,45 +257,43 @@ const { isOnline } = useNotes()
 ### 5. Checklist Editor
 
 ```javascript
-{type === 'checklist' && (
-  <div className="space-y-3">
-    <div className="flex gap-2">
-      <input
-        value={clInput}
-        onChange={e => setClInput(e.target.value)}
-        onKeyDown={e => {
-          if (e.key === 'Enter') {
-            e.preventDefault()
-            addChecklistItem()
-          }
-        }}
-        placeholder="List item…"
-        className="flex-1 bg-transparent placeholder-gray-500 focus:outline-none p-2 border-b border-[var(--border-light)]"
-      />
-      <button
-        onClick={addChecklistItem}
-        className="px-3 py-1.5 rounded-lg whitespace-nowrap bg-accent text-white hover:bg-accent-hover"
-      >
-        Add
-      </button>
-    </div>
-    {clItems.length > 0 && (
-      <div className="space-y-2">
-        {clItems.map(it => (
-          <ChecklistRow
-            key={it.id}
-            item={it}
-            readOnly
-            disableToggle
-          />
-        ))}
+{
+  type === "checklist" && (
+    <div className="space-y-3">
+      <div className="flex gap-2">
+        <input
+          value={clInput}
+          onChange={(e) => setClInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              addChecklistItem();
+            }
+          }}
+          placeholder="List item…"
+          className="flex-1 bg-transparent placeholder-gray-500 focus:outline-none p-2 border-b border-[var(--border-light)]"
+        />
+        <button
+          onClick={addChecklistItem}
+          className="px-3 py-1.5 rounded-lg whitespace-nowrap bg-accent text-white hover:bg-accent-hover"
+        >
+          Add
+        </button>
       </div>
-    )}
-  </div>
-)}
+      {clItems.length > 0 && (
+        <div className="space-y-2">
+          {clItems.map((it) => (
+            <ChecklistRow key={it.id} item={it} readOnly disableToggle />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 ```
 
 **Features:**
+
 - Input for new items
 - Enter to add
 - Add button
@@ -292,19 +305,22 @@ const { isOnline } = useNotes()
 ### 6. Drawing Canvas
 
 ```javascript
-{type === 'draw' && (
-  <DrawingCanvas
-    data={drawingData}
-    onChange={setDrawingData}
-    width={650}
-    height={450}
-    darkMode={dark}
-    hideModeToggle={true}
-  />
-)}
+{
+  type === "draw" && (
+    <DrawingCanvas
+      data={drawingData}
+      onChange={setDrawingData}
+      width={650}
+      height={450}
+      darkMode={dark}
+      hideModeToggle={true}
+    />
+  );
+}
 ```
 
 **Features:**
+
 - Canvas-based drawing
 - Path data storage
 - Dark mode support
@@ -316,29 +332,32 @@ const { isOnline } = useNotes()
 ### 7. Image Thumbnails
 
 ```javascript
-{images.length > 0 && (
-  <div className="mt-3 flex gap-2 overflow-x-auto">
-    {images.map(im => (
-      <div key={im.id} className="relative">
-        <img
-          src={im.src}
-          alt={im.name}
-          className="h-16 w-24 object-cover rounded-md border border-[var(--border-light)]"
-        />
-        <button
-          title="Remove image"
-          className="absolute -top-2 -right-2 bg-black/70 text-white rounded-full w-5 h-5 text-xs"
-          onClick={() => removeImage(im.id)}
-        >
-          ×
-        </button>
-      </div>
-    ))}
-  </div>
-)}
+{
+  images.length > 0 && (
+    <div className="mt-3 flex gap-2 overflow-x-auto">
+      {images.map((im) => (
+        <div key={im.id} className="relative">
+          <img
+            src={im.src}
+            alt={im.name}
+            className="h-16 w-24 object-cover rounded-md border border-[var(--border-light)]"
+          />
+          <button
+            title="Remove image"
+            className="absolute -top-2 -right-2 bg-black/70 text-white rounded-full w-5 h-5 text-xs"
+            onClick={() => removeImage(im.id)}
+          >
+            ×
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
 ```
 
 **Features:**
+
 - Horizontal scroll
 - Thumbnail display
 - Remove button
@@ -352,7 +371,7 @@ const { isOnline } = useNotes()
 ```javascript
 <input
   value={tags}
-  onChange={e => setTags(e.target.value)}
+  onChange={(e) => setTags(e.target.value)}
   type="text"
   placeholder="Add tags (comma-separated)"
   className="w-full sm:flex-1 bg-transparent text-sm placeholder-gray-500 focus:outline-none p-2"
@@ -360,6 +379,7 @@ const { isOnline } = useNotes()
 ```
 
 **Features:**
+
 - Comma-separated tags
 - Placeholder text
 - Responsive width
@@ -371,36 +391,39 @@ const { isOnline } = useNotes()
 ### 9. Formatting Button
 
 ```javascript
-{type === 'text' && (
-  <>
-    <button
-      ref={fmtBtnRef}
-      type="button"
-      onClick={() => setShowFormatting(v => !v)}
-      className="p-2 rounded-lg border border-[var(--border-light)] hover:bg-black/5 dark:hover:bg-white/10 transition-all"
-      title="Formatting"
-      aria-label="Open formatting options"
-    >
-      <FormatIcon />
-    </button>
-    <Popover
-      anchorRef={fmtBtnRef}
-      open={showFormatting}
-      onClose={() => setShowFormatting(false)}
-    >
-      <FormatToolbar
-        dark={dark}
-        onAction={t => {
-          setShowFormatting(false)
-          format(t)
-        }}
-      />
-    </Popover>
-  </>
-)}
+{
+  type === "text" && (
+    <>
+      <button
+        ref={fmtBtnRef}
+        type="button"
+        onClick={() => setShowFormatting((v) => !v)}
+        className="p-2 rounded-lg border border-[var(--border-light)] hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+        title="Formatting"
+        aria-label="Open formatting options"
+      >
+        <FormatIcon />
+      </button>
+      <Popover
+        anchorRef={fmtBtnRef}
+        open={showFormatting}
+        onClose={() => setShowFormatting(false)}
+      >
+        <FormatToolbar
+          dark={dark}
+          onAction={(t) => {
+            setShowFormatting(false);
+            format(t);
+          }}
+        />
+      </Popover>
+    </>
+  );
+}
 ```
 
 **Features:**
+
 - Only shown for text type
 - Toggle visibility
 - Position relative to button
@@ -415,39 +438,39 @@ const { isOnline } = useNotes()
 <div className="flex gap-1">
   <button
     type="button"
-    onClick={() => setType('text')}
+    onClick={() => setType("text")}
     className={`p-2 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
-      type === 'text'
-        ? 'border-accent bg-accent/10 text-accent dark:bg-accent/20'
-        : 'border-[var(--border-light)] hover:bg-black/5 text-gray-600 dark:text-gray-400'
+      type === "text"
+        ? "border-accent bg-accent/10 text-accent dark:bg-accent/20"
+        : "border-[var(--border-light)] hover:bg-black/5 text-gray-600 dark:text-gray-400"
     }`}
     title="Text note"
     aria-label="Text note"
   >
     <Text />
   </button>
-  
+
   <button
     type="button"
-    onClick={() => setType('checklist')}
+    onClick={() => setType("checklist")}
     className={`p-2 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
-      type === 'checklist'
-        ? 'border-accent bg-accent/10 text-accent dark:bg-accent/20'
-        : 'border-[var(--border-light)] hover:bg-black/5 text-gray-600 dark:text-gray-400'
+      type === "checklist"
+        ? "border-accent bg-accent/10 text-accent dark:bg-accent/20"
+        : "border-[var(--border-light)] hover:bg-black/5 text-gray-600 dark:text-gray-400"
     }`}
     title="Checklist"
     aria-label="Checklist note"
   >
     <Checklist />
   </button>
-  
+
   <button
     type="button"
-    onClick={() => setType('draw')}
+    onClick={() => setType("draw")}
     className={`p-2 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
-      type === 'draw'
-        ? 'border-accent bg-accent/10 text-accent dark:bg-accent/20'
-        : 'border-[var(--border-light)] hover:bg-black/5 text-gray-600 dark:text-gray-400'
+      type === "draw"
+        ? "border-accent bg-accent/10 text-accent dark:bg-accent/20"
+        : "border-[var(--border-light)] hover:bg-black/5 text-gray-600 dark:text-gray-400"
     }`}
     title="Drawing"
     aria-label="Drawing note"
@@ -458,6 +481,7 @@ const { isOnline } = useNotes()
 ```
 
 **Features:**
+
 - Three type buttons
 - Active state styling
 - Hover effects
@@ -518,6 +542,7 @@ const { isOnline } = useNotes()
 ```
 
 **Features:**
+
 - Visual color preview
 - Grid of color options
 - Selected state indicator
@@ -550,6 +575,7 @@ const { isOnline } = useNotes()
 ```
 
 **Features:**
+
 - Multiple file selection
 - Image files only
 - Hidden file input
@@ -570,6 +596,7 @@ const { isOnline } = useNotes()
 ```
 
 **Features:**
+
 - Primary action button
 - Accent color
 - Hover effect
@@ -583,13 +610,14 @@ const { isOnline } = useNotes()
 
 ```javascript
 useEffect(() => {
-  if (!contentRef.current) return
-  contentRef.current.style.height = 'auto'
-  contentRef.current.style.height = contentRef.current.scrollHeight + 'px'
-}, [content, type, contentRef])
+  if (!contentRef.current) return;
+  contentRef.current.style.height = "auto";
+  contentRef.current.style.height = contentRef.current.scrollHeight + "px";
+}, [content, type, contentRef]);
 ```
 
 **Behavior:**
+
 - Auto-expands with content
 - Resets height before setting
 - Triggers on content change
@@ -603,11 +631,13 @@ useEffect(() => {
 ### Breakpoints
 
 **Mobile (< sm):**
+
 - Vertical layout for footer
 - Full-width inputs
 - Stacked buttons
 
 **Tablet/Desktop (sm+):**
+
 - Horizontal layout for footer
 - Flex inputs
 - Inline buttons
@@ -639,18 +669,21 @@ useEffect(() => {
 ## Accessibility
 
 ### Keyboard Navigation
+
 - Tab order maintained
 - Focus visible on interactive elements
 - Enter to add checklist items
 - Escape to close popovers
 
 ### Screen Readers
+
 - ARIA labels on buttons
 - Meaningful placeholder text
 - Alt text on images
 - Semantic HTML structure
 
 ### Focus Management
+
 - Auto-focus title on expand
 - Visible focus indicators
 - Focus rings on buttons
@@ -663,41 +696,42 @@ useEffect(() => {
 ```mermaid
 graph TD
     A[Composer Render] --> B{Online?}
-    
+
     B -->|No| C[Show Offline Message]
     B -->|Yes| D{Collapsed?}
-    
+
     D -->|Yes| E[Show Single Input]
     E --> F[User Click]
     F --> G[Expand Composer]
     G --> H[Focus Title]
-    
+
     D -->|No| I[Show Expanded Composer]
     I --> J{Note Type}
-    
+
     J -->|text| K[Textarea]
     J -->|checklist| L[Checklist Editor]
     J -->|draw| M[Drawing Canvas]
-    
+
     K --> N[User Types]
     N --> O[setContent]
-    
+
     L --> P[User Enters Item]
     P --> Q[addChecklistItem]
     Q --> R[Update clItems]
-    
+
     M --> S[User Draws]
     S --> T[setDrawingData]
-    
+
     U[User Clicks Add Note] --> V[save]
-    V --> W[Create Note]
+    V -->|Success| W[Create Note]
+    V -->|Error| V1[Show Toast Error]
     W --> X[Reset Composer]
     X --> Y[Set Collapsed]
-    
+
     Z[Image Upload] --> AA[handleImageUpload]
     AA --> AB[Process Images]
     AB --> AC[Update images]
-    
+
     AD[Color Selection] --> AE[setColor]
     AE --> AF[Update Background]
 ```
@@ -707,24 +741,29 @@ graph TD
 ## Performance Optimizations
 
 ### 1. Controlled Inputs
+
 ```javascript
-<input value={title} onChange={e => setTitle(e.target.value)} />
+<input value={title} onChange={(e) => setTitle(e.target.value)} />
 ```
 
 **Purpose:** Prevent unnecessary re-renders
 
 ### 2. useEffect Dependencies
+
 ```javascript
 useEffect(() => {
   // Auto-resize logic
-}, [content, type, contentRef])
+}, [content, type, contentRef]);
 ```
 
 **Purpose:** Only run when content or type changes
 
 ### 3. Conditional Rendering
+
 ```javascript
-{type === 'text' && <FormatToolbar />}
+{
+  type === "text" && <FormatToolbar />;
+}
 ```
 
 **Purpose:** Only render formatting for text notes
@@ -741,6 +780,7 @@ style={{ backgroundColor: bgFor(color, dark, cardTransparency) }}
 ```
 
 **Classes:**
+
 - `glass-card` - Glass effect
 - `rounded-xl` - Rounded corners
 - `shadow-lg` - Large shadow
@@ -762,6 +802,7 @@ style={{
 ```
 
 **Logic:**
+
 - Default color: transparent background, gray border
 - Selected color: color background, matching border
 - Dark mode: considers dark parameter
@@ -774,33 +815,37 @@ style={{
 ### Unit Tests
 
 ```javascript
-describe('Composer Component', () => {
-  it('should show offline message when offline', () => {
+describe("Composer Component", () => {
+  it("should show offline message when offline", () => {
     // Test offline state rendering
   });
-  
-  it('should expand on click when collapsed', () => {
+
+  it("should expand on click when collapsed", () => {
     // Test collapsed state expansion
   });
-  
-  it('should render text editor for text type', () => {
+
+  it("should render text editor for text type", () => {
     // Test text type rendering
   });
-  
-  it('should render checklist editor for checklist type', () => {
+
+  it("should render checklist editor for checklist type", () => {
     // Test checklist type rendering
   });
-  
-  it('should render drawing canvas for draw type', () => {
+
+  it("should render drawing canvas for draw type", () => {
     // Test drawing type rendering
   });
-  
-  it('should show color picker', () => {
+
+  it("should show color picker", () => {
     // Test color picker
   });
-  
-  it('should add checklist item on enter', () => {
+
+  it("should add checklist item on enter", () => {
     // Test checklist item addition
+  });
+
+  it("should show toast error on failure", () => {
+    // Test toast notification on save error
   });
 });
 ```
@@ -808,16 +853,16 @@ describe('Composer Component', () => {
 ### Integration Tests
 
 ```javascript
-describe('Composer Integration', () => {
-  it('should complete note creation flow', () => {
+describe("Composer Integration", () => {
+  it("should complete note creation flow", () => {
     // Test: expand -> type -> add -> save
   });
-  
-  it('should handle image upload', () => {
+
+  it("should handle image upload", () => {
     // Test: upload -> preview -> remove
   });
-  
-  it('should handle type switching', () => {
+
+  it("should handle type switching", () => {
     // Test: text -> checklist -> draw
   });
 });
@@ -826,23 +871,23 @@ describe('Composer Integration', () => {
 ### E2E Tests (Playwright)
 
 ```javascript
-test('Create note', async ({ page }) => {
-  await page.goto('/#/notes');
-  
+test("Create note", async ({ page }) => {
+  await page.goto("/#/notes");
+
   // Click composer
   await page.click('[data-testid="composer-input"]');
-  
+
   // Enter title
-  await page.fill('[data-testid="composer-title"]', 'Test Note');
-  
+  await page.fill('[data-testid="composer-title"]', "Test Note");
+
   // Enter content
-  await page.fill('[data-testid="composer-content"]', 'Test content');
-  
+  await page.fill('[data-testid="composer-content"]', "Test content");
+
   // Add note
   await page.click('[data-testid="add-note-button"]');
-  
+
   // Verify
-  await expect(page.locator('text=Test Note')).toBeVisible();
+  await expect(page.locator("text=Test Note")).toBeVisible();
 });
 ```
 
@@ -853,11 +898,13 @@ test('Create note', async ({ page }) => {
 ### Issue: Composer not expanding on click
 
 **Possible Causes:**
+
 - Collapsed state not updating
 - Focus timeout issue
 - State update error
 
 **Solutions:**
+
 1. Verify collapsed state
 2. Check focus timeout value
 3. Test state update
@@ -868,12 +915,14 @@ test('Create note', async ({ page }) => {
 ### Issue: Textarea not auto-resizing
 
 **Possible Causes:**
+
 - Ref not attached
 - useEffect not running
 - scrollHeight incorrect
 - CSS overflow issue
 
 **Solutions:**
+
 1. Verify contentRef is set
 2. Check useEffect dependencies
 3. Test scrollHeight value
@@ -884,12 +933,14 @@ test('Create note', async ({ page }) => {
 ### Issue: Images not uploading
 
 **Possible Causes:**
+
 - File input ref not attached
 - handleImageUpload error
 - File format not supported
 - Offline mode
 
 **Solutions:**
+
 1. Verify fileInputRef is set
 2. Test handleImageUpload function
 3. Verify file types are images
@@ -900,12 +951,14 @@ test('Create note', async ({ page }) => {
 ### Issue: Checklist items not adding
 
 **Possible Causes:**
+
 - clInput value empty
 - addChecklistItem error
 - Enter key not triggering
 - Event preventDefault issue
 
 **Solutions:**
+
 1. Verify clInput has value
 2. Test addChecklistItem function
 3. Check onKeyDown handler
@@ -916,12 +969,14 @@ test('Create note', async ({ page }) => {
 ### Issue: Color not changing
 
 **Possible Causes:**
+
 - Color state not updating
 - bgFor function error
 - Style not applying
 - Default color logic
 
 **Solutions:**
+
 1. Verify setColor is called
 2. Test bgFor function
 3. Check style application

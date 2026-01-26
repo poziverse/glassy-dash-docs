@@ -53,6 +53,9 @@ The theming system uses CSS custom properties (variables) defined on the `:root`
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+
+  /* Glow (v1.1.4) */
+  --color-accent-glow: rgba(139, 92, 246, 0.2); /* Default neon glow */
 }
 
 /* Dark Mode Override */
@@ -75,38 +78,38 @@ The theming system uses CSS custom properties (variables) defined on the `:root`
 ```typescript
 interface ThemeState {
   // Mode
-  dark: boolean
+  dark: boolean;
 
   // Accent Color
-  accentColor: AccentColor
+  accentColor: AccentColor;
 
   // Background
-  backgroundImage: string | null | 'golden_gradient'
+  backgroundImage: string | null | "golden_gradient";
 
   // Preset
-  themePreset: string | null
+  themePreset: string | null;
 
   // View Mode
-  viewMode: 'grid' | 'list'
+  viewMode: "grid" | "list";
 
   // Compact Mode
-  compactMode: boolean
+  compactMode: boolean;
 
   // Overlay Opacity
-  overlayOpacity: number // 0.0 to 1.0
+  overlayOpacity: number; // 0.0 to 1.0
 
   // Card Transparency Preset
-  cardTransparency: string
+  cardTransparency: string;
 }
 
 type AccentColor =
-  | 'neon' // #8b5cf6 (purple)
-  | 'rose' // #f43f5e (red)
-  | 'emerald' // #10b981 (green)
-  | 'amber' // #f59e0b (yellow)
-  | 'cyan' // #06b6d4 (cyan)
-  | 'violet' // #8b5cf6 (violet)
-  | 'pink' // #ec4899 (pink)
+  | "neon" // #8b5cf6 (purple)
+  | "rose" // #f43f5e (red)
+  | "emerald" // #10b981 (green)
+  | "amber" // #f59e0b (yellow)
+  | "cyan" // #06b6d4 (cyan)
+  | "violet" // #8b5cf6 (violet)
+  | "pink"; // #ec4899 (pink)
 ```
 
 ---
@@ -170,92 +173,92 @@ export function setAccentColor(color) {
 ```javascript
 export const themePresets = {
   neonTokyo: {
-    name: 'Neon Tokyo',
-    accent: 'rose',
-    background: 'City-Night.png',
+    name: "Neon Tokyo",
+    accent: "rose",
+    background: "City-Night.png",
     dark: true,
     overlay: true,
     overlayOpacity: 0.85,
-    transparencyId: 'frosted',
-    description: 'Vibrant cyberpunk aesthetic with neon accents',
+    transparencyId: "frosted",
+    description: "Vibrant cyberpunk aesthetic with neon accents",
   },
 
   zenGarden: {
-    name: 'Zen Garden',
-    accent: 'emerald',
-    background: 'Bonsai-Plant.png',
+    name: "Zen Garden",
+    accent: "emerald",
+    background: "Bonsai-Plant.png",
     dark: true,
     overlay: true,
     overlayOpacity: 0.7,
-    transparencyId: 'medium',
-    description: 'Peaceful nature theme with green accents',
+    transparencyId: "medium",
+    description: "Peaceful nature theme with green accents",
   },
   goldenHour: {
-    name: 'Golden Hour',
-    accent: 'amber',
-    background: 'Fantasy - Sunset.png',
+    name: "Golden Hour",
+    accent: "amber",
+    background: "Fantasy - Sunset.png",
     dark: false,
     overlay: true,
     overlayOpacity: 0.6,
-    transparencyId: 'medium',
-    description: 'Warm golden theme with amber accents',
+    transparencyId: "medium",
+    description: "Warm golden theme with amber accents",
   },
 
   deepSpace: {
-    name: 'Deep Space',
-    accent: 'indigo',
+    name: "Deep Space",
+    accent: "indigo",
     background: null,
     dark: true,
     overlay: false,
     overlayOpacity: 0.85,
-    transparencyId: 'medium',
-    description: 'Classic dark theme with gradient background',
+    transparencyId: "medium",
+    description: "Classic dark theme with gradient background",
   },
 
   darkNature: {
-    name: 'Dark Nature',
-    accent: 'emerald',
-    background: 'Dark_Nature.png',
+    name: "Dark Nature",
+    accent: "emerald",
+    background: "Dark_Nature.png",
     dark: true,
     overlay: true,
     overlayOpacity: 0.6,
-    transparencyId: 'frosted',
-    description: 'Deep forest tones with emerald accents',
+    transparencyId: "frosted",
+    description: "Deep forest tones with emerald accents",
   },
 
   etherealSilk: {
-    name: 'Ethereal Silk',
-    accent: 'violet',
-    background: 'Nix Silk 06.png',
+    name: "Ethereal Silk",
+    accent: "violet",
+    background: "Nix Silk 06.png",
     dark: true,
     overlay: true,
     overlayOpacity: 0.4,
-    transparencyId: 'airy',
-    description: 'Soft, flowing silk texture with violet hues',
+    transparencyId: "airy",
+    description: "Soft, flowing silk texture with violet hues",
   },
 
   midnightBlue: {
-    name: 'Midnight Blue',
-    accent: 'sky',
-    background: 'Nightfall-by-the-Lake.jpg',
+    name: "Midnight Blue",
+    accent: "sky",
+    background: "Nightfall-by-the-Lake.jpg",
     dark: true,
     overlay: true,
     overlayOpacity: 0.7,
-    transparencyId: 'subtle',
-    description: 'Calm lakeside night with sky blue accents',
+    transparencyId: "subtle",
+    description: "Calm lakeside night with sky blue accents",
   },
 
   urbanRain: {
-    name: 'Urban Rain',
-    accent: 'indigo',
-    background: 'City-Rain.png',
+    name: "Urban Rain",
+    accent: "indigo",
+    background: "City-Rain.png",
     dark: true,
     overlay: true,
     overlayOpacity: 0.8,
-    transparencyId: 'medium',
-    description: 'Moody rainy city with deep indigo accents',
+    transparencyId: "medium",
+    description: "Moody rainy city with deep indigo accents",
   },
-}
+};
 /* Note: Presets now control Dark Mode, Card Transparency, and Overlay Opacity to ensure optimal visual combinations. */
 ```
 
@@ -263,15 +266,15 @@ export const themePresets = {
 
 ```javascript
 export function applyThemePreset(presetName) {
-  const preset = themePresets[presetName]
+  const preset = themePresets[presetName];
 
   // Apply comprehensive settings
-  setDark(preset.dark)
-  setAccentColor(preset.accent)
-  setBackgroundImage(preset.background)
-  setBackgroundOverlay(preset.overlay) // boolean
-  setOverlayOpacity(preset.overlayOpacity) // number
-  setCardTransparency(preset.transparencyId) // string
+  setDark(preset.dark);
+  setAccentColor(preset.accent);
+  setBackgroundImage(preset.background);
+  setBackgroundOverlay(preset.overlay); // boolean
+  setOverlayOpacity(preset.overlayOpacity); // number
+  setCardTransparency(preset.transparencyId); // string
 }
 ```
 
@@ -343,28 +346,28 @@ export const backgrounds = {
 
 ```javascript
 export async function loadBackground(path) {
-  const fullUrl = `/backgrounds/${path}`
+  const fullUrl = `/backgrounds/${path}`;
 
   // Preload image
   return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => resolve(fullUrl)
-    img.onerror = reject
-    img.src = fullUrl
-  })
+    const img = new Image();
+    img.onload = () => resolve(fullUrl);
+    img.onerror = reject;
+    img.src = fullUrl;
+  });
 }
 
 export function setBackground(path) {
-  const root = document.documentElement
+  const root = document.documentElement;
 
   // Set as CSS variable
-  root.style.setProperty('--background-image', `url(${path})`)
+  root.style.setProperty("--background-image", `url(${path})`);
 
   // Or set as body background
-  document.body.style.backgroundImage = `url(${path})`
-  document.body.style.backgroundSize = 'cover'
-  document.body.style.backgroundPosition = 'center'
-  document.body.style.backgroundAttachment = 'fixed'
+  document.body.style.backgroundImage = `url(${path})`;
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+  document.body.style.backgroundAttachment = "fixed";
 }
 ```
 
@@ -406,44 +409,44 @@ export function setBackground(path) {
 ### 6.1 Context Provider
 
 ```jsx
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { setAccentColor, setDark, setBackground } from '../themes'
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { setAccentColor, setDark, setBackground } from "../themes";
 
-const SettingsContext = createContext()
+const SettingsContext = createContext();
 
 export function SettingsProvider({ children }) {
   const [state, setState] = useState(() => {
     // Load from localStorage
     return {
-      dark: localStorage.getItem('dark') === 'true',
-      accentColor: localStorage.getItem('accentColor') || 'neon',
-      backgroundImage: localStorage.getItem('backgroundImage'),
-      themePreset: localStorage.getItem('themePreset'),
-      viewMode: localStorage.getItem('viewMode') || 'grid',
-      compactMode: localStorage.getItem('compactMode') === 'true',
-    }
-  })
+      dark: localStorage.getItem("dark") === "true",
+      accentColor: localStorage.getItem("accentColor") || "neon",
+      backgroundImage: localStorage.getItem("backgroundImage"),
+      themePreset: localStorage.getItem("themePreset"),
+      viewMode: localStorage.getItem("viewMode") || "grid",
+      compactMode: localStorage.getItem("compactMode") === "true",
+    };
+  });
 
   // Apply theme on mount
   useEffect(() => {
-    setDark(state.dark)
-    setAccentColor(state.accentColor)
+    setDark(state.dark);
+    setAccentColor(state.accentColor);
     if (state.backgroundImage) {
-      setBackground(state.backgroundImage)
+      setBackground(state.backgroundImage);
     }
-  }, [])
+  }, []);
 
   // Persist changes
   const updateSetting = (key, value) => {
-    setState(prev => ({ ...prev, [key]: value }))
-    localStorage.setItem(key, String(value))
-  }
+    setState((prev) => ({ ...prev, [key]: value }));
+    localStorage.setItem(key, String(value));
+  };
 
   return (
     <SettingsContext.Provider value={{ ...state, updateSetting }}>
       {children}
     </SettingsContext.Provider>
-  )
+  );
 }
 ```
 
@@ -451,7 +454,7 @@ export function SettingsProvider({ children }) {
 
 ```javascript
 export function useSettings() {
-  const context = useContext(SettingsContext)
+  const context = useContext(SettingsContext);
 
   return {
     // Getters
@@ -464,41 +467,41 @@ export function useSettings() {
 
     // Actions
     toggleDark: () => {
-      const newValue = !context.dark
-      context.updateSetting('dark', newValue)
-      setDark(newValue)
+      const newValue = !context.dark;
+      context.updateSetting("dark", newValue);
+      setDark(newValue);
     },
 
-    setAccentColor: color => {
-      context.updateSetting('accentColor', color)
-      setAccentColor(color)
+    setAccentColor: (color) => {
+      context.updateSetting("accentColor", color);
+      setAccentColor(color);
     },
 
-    setBackgroundImage: path => {
-      context.updateSetting('backgroundImage', path)
-      setBackground(path)
+    setBackgroundImage: (path) => {
+      context.updateSetting("backgroundImage", path);
+      setBackground(path);
     },
 
-    setThemePreset: preset => {
-      const presetConfig = themePresets[preset]
-      context.updateSetting('themePreset', preset)
-      context.updateSetting('dark', presetConfig.dark)
-      context.updateSetting('accentColor', presetConfig.accent)
-      context.updateSetting('backgroundImage', presetConfig.background)
-      setDark(presetConfig.dark)
-      setAccentColor(presetConfig.accent)
-      setBackground(presetConfig.background)
+    setThemePreset: (preset) => {
+      const presetConfig = themePresets[preset];
+      context.updateSetting("themePreset", preset);
+      context.updateSetting("dark", presetConfig.dark);
+      context.updateSetting("accentColor", presetConfig.accent);
+      context.updateSetting("backgroundImage", presetConfig.background);
+      setDark(presetConfig.dark);
+      setAccentColor(presetConfig.accent);
+      setBackground(presetConfig.background);
     },
 
-    setViewMode: mode => {
-      context.updateSetting('viewMode', mode)
+    setViewMode: (mode) => {
+      context.updateSetting("viewMode", mode);
     },
 
     toggleCompactMode: () => {
-      const newValue = !context.compactMode
-      context.updateSetting('compactMode', newValue)
+      const newValue = !context.compactMode;
+      context.updateSetting("compactMode", newValue);
     },
-  }
+  };
 }
 ```
 
@@ -510,7 +513,7 @@ export function useSettings() {
 
 ```jsx
 function ThemeSwitcher() {
-  const { dark, toggleDark, accentColor, setAccentColor } = useSettings()
+  const { dark, toggleDark, accentColor, setAccentColor } = useSettings();
 
   return (
     <div className="theme-switcher">
@@ -518,18 +521,18 @@ function ThemeSwitcher() {
       <button
         onClick={toggleDark}
         className="theme-toggle"
-        aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+        aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
       >
         {dark ? <SunIcon /> : <MoonIcon />}
       </button>
 
       {/* Accent Color Picker */}
       <div className="accent-colors">
-        {Object.keys(accentColors).map(color => (
+        {Object.keys(accentColors).map((color) => (
           <button
             key={color}
             onClick={() => setAccentColor(color)}
-            className={`color-btn ${accentColor === color ? 'active' : ''}`}
+            className={`color-btn ${accentColor === color ? "active" : ""}`}
             style={{ backgroundColor: accentColors[color].primary }}
             aria-label={`Set ${color} accent color`}
           />
@@ -542,7 +545,7 @@ function ThemeSwitcher() {
         <span>Background</span>
       </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -550,30 +553,30 @@ function ThemeSwitcher() {
 
 ```jsx
 function BackgroundPicker() {
-  const { backgroundImage, setBackgroundImage, dark } = useSettings()
-  const [isOpen, setIsOpen] = useState(false)
+  const { backgroundImage, setBackgroundImage, dark } = useSettings();
+  const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
-    { id: 'desktop', name: 'Desktop', backgrounds: backgrounds.desktop },
-    { id: 'mobile', name: 'Mobile', backgrounds: backgrounds.mobile },
-    { id: 'xl', name: '4K', backgrounds: backgrounds.xl },
-  ]
+    { id: "desktop", name: "Desktop", backgrounds: backgrounds.desktop },
+    { id: "mobile", name: "Mobile", backgrounds: backgrounds.mobile },
+    { id: "xl", name: "4K", backgrounds: backgrounds.xl },
+  ];
 
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <div className="background-picker">
-        {categories.map(category => (
+        {categories.map((category) => (
           <div key={category.id}>
             <h3>{category.name}</h3>
             <div className="background-grid">
-              {category.backgrounds.map(bg => (
+              {category.backgrounds.map((bg) => (
                 <button
                   key={bg}
                   onClick={() => {
-                    setBackgroundImage(`/backgrounds/${category.id}/${bg}`)
-                    setIsOpen(false)
+                    setBackgroundImage(`/backgrounds/${category.id}/${bg}`);
+                    setIsOpen(false);
                   }}
-                  className={`background-thumb ${backgroundImage?.includes(bg) ? 'active' : ''}`}
+                  className={`background-thumb ${backgroundImage?.includes(bg) ? "active" : ""}`}
                 >
                   <img src={`/backgrounds/thumbs/${bg}`} alt={bg} />
                 </button>
@@ -585,8 +588,8 @@ function BackgroundPicker() {
         {/* Clear Background */}
         <button
           onClick={() => {
-            setBackgroundImage(null)
-            setIsOpen(false)
+            setBackgroundImage(null);
+            setIsOpen(false);
           }}
           className="clear-btn"
         >
@@ -594,7 +597,7 @@ function BackgroundPicker() {
         </button>
       </div>
     </Modal>
-  )
+  );
 }
 ```
 
@@ -602,14 +605,22 @@ function BackgroundPicker() {
 
 ```jsx
 function ThemePresetSelector() {
-  const { setThemePreset } = useSettings()
+  const { setThemePreset } = useSettings();
 
   return (
     <div className="preset-selector">
       <h3>Theme Presets</h3>
       {Object.entries(themePresets).map(([key, preset]) => (
-        <button key={key} onClick={() => setThemePreset(key)} className="preset-card">
-          <img src={preset.background} alt={preset.name} className="preset-preview" />
+        <button
+          key={key}
+          onClick={() => setThemePreset(key)}
+          className="preset-card"
+        >
+          <img
+            src={preset.background}
+            alt={preset.name}
+            className="preset-preview"
+          />
           <div className="preset-info">
             <h4>{preset.name}</h4>
             <p>{preset.description}</p>
@@ -620,7 +631,7 @@ function ThemePresetSelector() {
         </button>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -632,15 +643,15 @@ function ThemePresetSelector() {
 
 ```javascript
 export const noteColors = {
-  default: { name: 'Default', hex: '#e5e7eb' },
-  blue: { name: 'Blue', hex: '#3b82f6' },
-  green: { name: 'Green', hex: '#10b981' },
-  red: { name: 'Red', hex: '#ef4444' },
-  yellow: { name: 'Yellow', hex: '#f59e0b' },
-  purple: { name: 'Purple', hex: '#8b5cf6' },
-  pink: { name: 'Pink', hex: '#ec4899' },
-  orange: { name: 'Orange', hex: '#f97316' },
-}
+  default: { name: "Default", hex: "#e5e7eb" },
+  blue: { name: "Blue", hex: "#3b82f6" },
+  green: { name: "Green", hex: "#10b981" },
+  red: { name: "Red", hex: "#ef4444" },
+  yellow: { name: "Yellow", hex: "#f59e0b" },
+  purple: { name: "Purple", hex: "#8b5cf6" },
+  pink: { name: "Pink", hex: "#ec4899" },
+  orange: { name: "Orange", hex: "#f97316" },
+};
 ```
 
 ### 8.2 Color Picker Component
@@ -653,7 +664,7 @@ function NoteColorPicker({ currentColor, onColorChange }) {
         <button
           key={key}
           onClick={() => onColorChange(key)}
-          className={`color-option ${currentColor === key ? 'active' : ''}`}
+          className={`color-option ${currentColor === key ? "active" : ""}`}
           style={{ backgroundColor: color.hex }}
           aria-label={`Set ${color.name} color`}
         >
@@ -661,7 +672,7 @@ function NoteColorPicker({ currentColor, onColorChange }) {
         </button>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -673,17 +684,17 @@ function NoteColorPicker({ currentColor, onColorChange }) {
 
 ```javascript
 // Detect device type
-const isMobile = window.innerWidth < 768
-const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024
+const isMobile = window.innerWidth < 768;
+const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
 // Auto-select background category
 export function getOptimalBackground() {
   if (isMobile) {
-    return backgrounds.mobile[0]
+    return backgrounds.mobile[0];
   } else if (isTablet) {
-    return backgrounds.desktop[0]
+    return backgrounds.desktop[0];
   } else {
-    return backgrounds.xl[0]
+    return backgrounds.xl[0];
   }
 }
 ```
@@ -693,18 +704,18 @@ export function getOptimalBackground() {
 ```javascript
 // Grid view: Masonry-style layout
 const gridView = {
-  columns: 'repeat(auto-fill, minmax(250px, 1fr))',
-  gap: '1rem',
-}
+  columns: "repeat(auto-fill, minmax(250px, 1fr))",
+  gap: "1rem",
+};
 
 // List view: Single column layout
 const listView = {
-  columns: '1fr',
-  gap: '0.5rem',
-}
+  columns: "1fr",
+  gap: "0.5rem",
+};
 
 export function getViewModeStyles(mode) {
-  return mode === 'grid' ? gridView : listView
+  return mode === "grid" ? gridView : listView;
 }
 ```
 
@@ -719,15 +730,15 @@ export function getViewModeStyles(mode) {
 // WCAG AAA compliance: 7:1 contrast ratio
 
 function checkContrast(foreground, background) {
-  const fgL = getLuminance(foreground)
-  const bgL = getLuminance(background)
-  const ratio = (fgL + 0.05) / (bgL + 0.05)
+  const fgL = getLuminance(foreground);
+  const bgL = getLuminance(background);
+  const ratio = (fgL + 0.05) / (bgL + 0.05);
 
   return {
     ratio,
     passesAA: ratio >= 4.5,
     passesAAA: ratio >= 7,
-  }
+  };
 }
 ```
 
@@ -754,18 +765,18 @@ function checkContrast(foreground, background) {
 export function lazyLoadBackground(path) {
   // Use Intersection Observer
   const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          loadBackground(path)
-          observer.disconnect()
+          loadBackground(path);
+          observer.disconnect();
         }
-      })
+      });
     },
-    { rootMargin: '100px' }
-  )
+    { rootMargin: "100px" },
+  );
 
-  return observer
+  return observer;
 }
 ```
 
@@ -774,13 +785,13 @@ export function lazyLoadBackground(path) {
 ```javascript
 // Batch CSS variable updates for performance
 export function batchUpdateVariables(updates) {
-  const root = document.documentElement
+  const root = document.documentElement;
 
   requestAnimationFrame(() => {
     Object.entries(updates).forEach(([key, value]) => {
-      root.style.setProperty(key, value)
-    })
-  })
+      root.style.setProperty(key, value);
+    });
+  });
 }
 ```
 
@@ -791,43 +802,47 @@ export function batchUpdateVariables(updates) {
 ### 12.1 Theme Tests
 
 ```jsx
-describe('Theming System', () => {
-  it('applies dark mode', () => {
-    setDark(true)
-    expect(document.documentElement.classList.contains('dark')).toBe(true)
-  })
+describe("Theming System", () => {
+  it("applies dark mode", () => {
+    setDark(true);
+    expect(document.documentElement.classList.contains("dark")).toBe(true);
+  });
 
-  it('changes accent color', () => {
-    setAccentColor('rose')
-    const accent = getComputedStyle(document.documentElement).getPropertyValue('--color-accent')
-    expect(accent).toBe('#f43f5e')
-  })
+  it("changes accent color", () => {
+    setAccentColor("rose");
+    const accent = getComputedStyle(document.documentElement).getPropertyValue(
+      "--color-accent",
+    );
+    expect(accent).toBe("#f43f5e");
+  });
 
-  it('sets background image', () => {
-    setBackground('/backgrounds/desktop/City-Night.png')
-    const bg = document.body.style.backgroundImage
-    expect(bg).toContain('City-Night.png')
-  })
-})
+  it("sets background image", () => {
+    setBackground("/backgrounds/desktop/City-Night.png");
+    const bg = document.body.style.backgroundImage;
+    expect(bg).toContain("City-Night.png");
+  });
+});
 ```
 
 ### 12.2 Contrast Tests
 
 ```jsx
-describe('Accessibility', () => {
-  it('meets WCAG AA standards', () => {
-    const contrast = checkContrast('#1f2937', '#ffffff')
-    expect(contrast.passesAA).toBe(true)
-  })
+describe("Accessibility", () => {
+  it("meets WCAG AA standards", () => {
+    const contrast = checkContrast("#1f2937", "#ffffff");
+    expect(contrast.passesAA).toBe(true);
+  });
 
-  it('respects reduced motion preference', () => {
-    const root = document.documentElement
-    root.classList.add('reduced-motion')
+  it("respects reduced motion preference", () => {
+    const root = document.documentElement;
+    root.classList.add("reduced-motion");
 
-    const duration = getComputedStyle(document.body).getPropertyValue('animation-duration')
-    expect(duration).toBe('0.01ms')
-  })
-})
+    const duration = getComputedStyle(document.body).getPropertyValue(
+      "animation-duration",
+    );
+    expect(duration).toBe("0.01ms");
+  });
+});
 ```
 
 ---
@@ -837,18 +852,20 @@ describe('Accessibility', () => {
 ### 13.1 Using Theme Context
 
 ```jsx
-import { useSettings } from '../contexts'
+import { useSettings } from "../contexts";
 
 function MyComponent() {
-  const { dark, accentColor, toggleDark, setAccentColor } = useSettings()
+  const { dark, accentColor, toggleDark, setAccentColor } = useSettings();
 
   return (
-    <div className={dark ? 'dark' : 'light'}>
-      <button onClick={toggleDark}>{dark ? 'Light Mode' : 'Dark Mode'}</button>
+    <div className={dark ? "dark" : "light"}>
+      <button onClick={toggleDark}>{dark ? "Light Mode" : "Dark Mode"}</button>
 
-      <div className={`accent-${accentColor}`}>Content with {accentColor} accent</div>
+      <div className={`accent-${accentColor}`}>
+        Content with {accentColor} accent
+      </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -856,13 +873,13 @@ function MyComponent() {
 
 ```jsx
 function CustomThemeSwitcher() {
-  const { dark, accentColor, setAccentColor, toggleDark } = useSettings()
+  const { dark, accentColor, setAccentColor, toggleDark } = useSettings();
 
   return (
     <div className="custom-theme">
       {/* Custom toggle switch */}
       <div
-        className={`toggle-switch ${dark ? 'on' : 'off'}`}
+        className={`toggle-switch ${dark ? "on" : "off"}`}
         onClick={toggleDark}
         role="switch"
         aria-checked={dark}
@@ -874,7 +891,7 @@ function CustomThemeSwitcher() {
 
       {/* Custom color palette */}
       <div className="custom-palette">
-        {customColors.map(color => (
+        {customColors.map((color) => (
           <div
             key={color.id}
             onClick={() => setAccentColor(color.id)}
@@ -884,7 +901,7 @@ function CustomThemeSwitcher() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 ```
 
