@@ -27,19 +27,19 @@ Provide intuitive markdown formatting interface with:
 
 ## Key Responsibilities
 
-### 1. Formatting Options
+### 1. Formatting & History
 - Headings (H1, H2, H3)
 - Text styling (bold, italic, strikethrough)
 - Code formatting (inline, block)
 - List creation (bullet, numbered)
-- Block quotes
-- Link insertion
+- Block quotes and link insertion
+- **History Management**: Undo and Redo actions (with keyboard shortcuts)
 
 ### 2. User Experience
 - Visual grouping with dividers
 - Tooltips for guidance
 - Keyboard shortcuts displayed
-- Consistent hover effects
+- Responsive wrapping (`flex-wrap`) for reliability on smaller screens
 - Dark mode styling
 
 ### 3. Accessibility
@@ -54,27 +54,13 @@ Provide intuitive markdown formatting interface with:
 
 ```
 FormatToolbar
-├── Toolbar Container
+├── Toolbar Container (flex-wrap gap-0.5)
 │   └── Button Groups
-│       ├── Headings Group
-│       │   ├── Heading 1 Button
-│       │   ├── Heading 2 Button
-│       │   ├── Heading 3 Button
-│       │   └── Divider
-│       ├── Text Formatting Group
-│       │   ├── Bold Button
-│       │   ├── Italic Button
-│       │   ├── Strikethrough Button
-│       │   └── Divider
-│       ├── Code Group
-│       │   ├── Inline Code Button
-│       │   ├── Code Block Button
-│       │   └── Divider
-│       └── Lists & Quote Group
-│           ├── Quote Button
-│           ├── Bullet List Button
-│           ├── Numbered List Button
-│           └── Link Button
+│       ├── History Group (Undo, Redo)
+│       ├── Headings Group (H1, H2, H3)
+│       ├── Text Formatting Group (Bold, Italic, Strikethrough)
+│       ├── Code Group (Inline, Block)
+│       └── Lists & Quote Group (Quote, List, Link)
 ```
 
 ---
@@ -84,7 +70,9 @@ FormatToolbar
 ```javascript
 {
   dark: boolean,           // Dark mode enabled (default: false)
-  onAction: (type: string) => void  // Action callback (required)
+  onAction: (type: string) => void,  // Action callback (required)
+  canUndo: boolean,        // Whether undo is possible (optional)
+  canRedo: boolean         // Whether redo is possible (optional)
 }
 ```
 

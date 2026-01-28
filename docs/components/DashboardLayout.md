@@ -93,6 +93,7 @@ DashboardLayout
     email: string
   },
   onSearch: (query: string) => void,    // Search handler (optional)
+  headerActions: React.ReactNode,        // View-specific navbar tools (optional)
   tags: Array<{                       // Tags list (optional)
     id: string,
     name: string
@@ -138,6 +139,12 @@ DashboardLayout
 - **Default:** Optional
 - **Purpose:** Search handler
 - **Usage:** Called when user types in search bar
+
+### headerActions
+- **Type:** `React.ReactNode`
+- **Default:** Optional
+- **Purpose:** View-specific navbar tools
+- **Usage:** Used to inject buttons or telemetry into the top navigation bar
 
 ### tags
 - **Type:** `Array<{id: string, name: string}>`

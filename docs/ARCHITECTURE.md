@@ -63,31 +63,25 @@ App.jsx
 ├── ErrorBoundary
 ├── Router (Hash-based)
 │   ├── AuthViews
-│   │   ├── Login
-│   │   └── Register
-│   ├── NotesView
-│   │   ├── DashboardLayout
-│   │   │   ├── Sidebar
-│   │   │   ├── SearchBar
-│   │   │   └── NotesGrid
-│   │   │       └── NoteCard (xN)
-│   │   ├── SettingsPanel
-│   │   └── Modal
-│   │       ├── NoteEditor
-│   │       ├── ImageViewer
-│   │       ├── CollaborationModal
-│   │       └── FormatToolbar
-│   └── AdminView
-│       ├── UserManagement
-│       ├── LogViewer
-│       └── SystemStats
-└── GlobalProviders
-    ├── AuthContext
-    ├── NotesContext
-    ├── SettingsContext
-    ├── ModalContext
-    ├── ComposerContext
-    └── UIContext
+│   ├── DashboardLayout (Main Shell)
+│   │   ├── Sidebar
+│   │   ├── Top Navbar (Title, Search, Action Buttons)
+│   │   ├── NotesView
+│   │   │   ├── NotesGrid
+│   │   │   └── NoteCard (xN)
+│   │   ├── VoiceView
+│   │   │   ├── RecordingStudio
+│   │   │   └── VoiceGallery
+│   │   ├── DocsView
+│   │   │   └── GlassyEditor
+│   │   ├── AlertsView
+│   │   ├── AdminView
+│   │   └── HealthView (Mission Control)
+│   └── Modal (Context-Driven)
+│       ├── NoteEditor
+│       ├── ImageViewer
+│       └── CollaborationModal
+└── GlobalProviders (Auth, Notes, UI, etc.)
 ```
 
 ### Key Components

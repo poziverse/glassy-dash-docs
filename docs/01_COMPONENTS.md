@@ -22,17 +22,20 @@ App (Root)
 │   ├── NotesView
 │   │   ├── NoteCard
 │   │   └── Bulk Operations UI
-│   ├── SearchBar
-│   └── Composer
-│       ├── FormatToolbar
-│       └── Type Selection
+│   ├── VoiceView
+│   │   ├── RecordingStudio
+│   │   └── VoiceGallery
+│   ├── DocsView
+│   │   └── GlassyEditor
+│   ├── HealthView (Mission Control)
+│   ├── AdminView
+│   ├── SearchBar (Top Navbar)
+│   └── Composer (Modal-based)
 ├── SettingsPanel
-├── AdminView
 └── Modal (Dialog)
-    ├── FormatToolbar
-    ├── ChecklistRow (for checklists)
-    ├── DrawingCanvas (for drawings)
-    ├── DrawingPreview (for drawings)
+    ├── FormatToolbar (Optimized)
+    ├── ChecklistRow
+    ├── DrawingCanvas
     └── Image Gallery
 ```
 
@@ -58,13 +61,14 @@ App (Root)
 ### 2. Layout Components
 
 #### DashboardLayout
-**Purpose:** Main layout wrapper for the dashboard interface
+**Purpose:** Main layout wrapper and shell for the authenticated application experience.
 
 **Key Responsibilities:**
-- Sidebar navigation
-- Main content area
-- Responsive layout
-- Theme application
+- **Sidebar Integration**: Hosts the collapsible navigation sidebar.
+- **Top Navbar Navigation**: Displays current view title and search bar.
+- **Dynamic Header Actions**: Supports a `headerActions` prop for views to inject buttons, telemetry, or notifications into the primary navbar.
+- **Responsive Layout**: Manages the main content area width and scrolling behavior.
+- **Theming Shell**: Applies global glassmorphism styles and CSS variables (e.g., `--sidebar-width`).
 
 **File:** `GLASSYDASH/src/components/DashboardLayout.jsx`
 
