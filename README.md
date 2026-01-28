@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-0.67%20%28Beta%29-blue.svg)](https://github.com/yourusername/glassy-dash)
+[![Version](https://img.shields.io/badge/version-1.1.6-blue.svg)](https://github.com/yourusername/glassy-dash)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.md)
 [![Node](https://img.shields.io/badge/node-%3E%3D%2018.0-brightgreen.svg)](https://nodejs.org/)
 [![Docker](https://img.shields.io/badge/docker-supported-blue.svg)](https://www.docker.com/)
@@ -435,4 +435,4 @@ Made with ❤️ by the GLASSYDASH Team
 
 ---
 
-**Version**: 0.67 (Beta) | **Last Updated**: January 23, 2026 | **Next Release**: v0.68 (February 2026)
+**Version**: 1.1.6 | **Last Updated**: January 28, 2026

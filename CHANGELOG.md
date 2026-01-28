@@ -6,34 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.67.1] - 2026-01-25
+## [1.1.6] - 2026-01-28
 
 ### Added
 
-- 🚀 **New GlassyDocs Grid Interface**
-  - Grid-based document management by default
-  - Prominent "New Document" button for quick creation
-- 🚀 **Enhanced Voice Studio Gallery**
-  - Grid-based recording history with AI summaries
-  - Native "View in Notes" integration for easy management
-- 🚀 **Recording Studio Focus Mode**
-  - Dedicated recording overlay for undistracted voice capture
-  - High-fidelity visualizer with optimized rendering
+- 🚀 **GlassyDocs System** - Full document management with nested folders and hierarchy
+- 🚀 **Voice Studio** - Complete audio recording suite with AI transcription
+- 🚀 **Multimedia Support** - YouTube integration and self-hosted music streaming
+- 🚀 **Admin Dashboard** - User management, storage quotas, and system monitoring
+- 🚀 **Enhanced Theming** - Theme presets, custom backgrounds, and accent colors
+- 🚀 **Robust Error Handling** - Network resilience with automatic retry logic
 
 ### Fixed
 
-- 🐛 UX: Removed document auto-selection to provide better overview on landing
-- 🎨 UI: Improved layout consistency between Docs, Voice, and Notes views
-- 🎨 UI: Standardized action buttons for creation tasks across the workspace
-
-### Fixed
-
-- 🐛 Bug: Note cards truncated at 6 lines with line-clamp
-- 🐛 Bug: Note content overflow not scrollable in dark/light modes
-- 🐛 Bug: Clicking note cards doesn't open note in composer
-- 🎨 UI: Added proper CSS overflow handling for note-content
-- 🎨 UI: Removed line-clamp-6 restriction from note cards
-- 🎨 UI: Fixed NoteCard click handler to properly open notes
+- 🐛 Note card overflow and scrolling issues
+- 🐛 Network failures with automatic retry (3 attempts)
+- 🐛 Authentication errors with session expiration handling
+- 🐛 Audio errors with microphone access troubleshooting
+- 🐛 API errors with validation messages
+- 🎨 UI consistency across Docs, Voice, and Notes views
 
 ### Planned Features
 
@@ -299,5 +290,5 @@ npm run migrate
 **For Older Releases**
 See [GitHub Releases](https://github.com/yourusername/glassy-dash/releases)
 
-**Current Version**: 0.67.0 (Beta)  
-**Next Release**: 0.68.0 (Planned: February 2026)
+**Current Version**: 1.1.6  
+**Last Updated**: January 28, 2026
