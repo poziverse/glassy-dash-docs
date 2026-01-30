@@ -22,7 +22,7 @@ docker save glassy-dash:latest -o glassy-dash.tar
 Push the tarball and configuration scripts to the jump host.
 
 ```bash
-scp glassy-dash.tar docker-compose.prod.yml docker_manage.sh glassy-jump:~/
+scp glassy-dash.tar docker-compose.prod.yml .env docker_manage.sh glassy-jump:~/
 ```
 
 ### 3. Transfer to Target VM
@@ -30,7 +30,7 @@ scp glassy-dash.tar docker-compose.prod.yml docker_manage.sh glassy-jump:~/
 Move the files from the jump host to the actual application VM.
 
 ```bash
-ssh -t glassy-jump "scp ~/glassy-dash.tar ~/docker-compose.prod.yml ~/docker_manage.sh pozi@192.168.122.45:~/"
+ssh -t glassy-jump "scp ~/glassy-dash.tar ~/docker-compose.prod.yml ~/.env ~/docker_manage.sh pozi@192.168.122.45:~/"
 ```
 
 ### 4. Deploy on VM
