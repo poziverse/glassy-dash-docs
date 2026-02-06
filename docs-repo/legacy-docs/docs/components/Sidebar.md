@@ -14,7 +14,7 @@
 ## Purpose
 
 Provide comprehensive navigation interface with:
-- Primary navigation (All Notes, Archive, Admin)
+- Primary navigation (Notes, Archive, Admin)
 - System navigation (Health, Alerts)
 - Tag-based filtering
 - Collapsible state for space efficiency
@@ -29,7 +29,7 @@ Provide comprehensive navigation interface with:
 ## Key Responsibilities
 
 ### 1. Navigation
-- Primary views (All Notes, Archive)
+- Primary views (Notes, Archive)
 - System views (Health, Alerts)
 - Settings panel
 - Admin panel (conditional)
@@ -69,7 +69,7 @@ Sidebar
 │   └── Collapse toggle button
 ├── Navigation Content
 │   ├── Section: Views
-│   │   ├── All Notes
+│   │   ├── Notes
 │   │   └── Archive
 │   ├── Section: System (conditional)
 │   │   ├── Health
@@ -287,7 +287,7 @@ Section header component.
 <SectionLabel label="Views" collapsed={collapsed} />
 <SidebarItem 
   icon={LayoutDashboard} 
-  label="All Notes" 
+  label="Notes" 
   active={activeSection === 'overview' && !activeTag} 
   onClick={() => { safeOnNavigate('overview'); safeOnTagSelect(null); }} 
   collapsed={collapsed}
@@ -302,7 +302,7 @@ Section header component.
 ```
 
 **Items:**
-- All Notes (default view)
+- Notes (default view)
 - Archive (special tag filter)
 
 ---

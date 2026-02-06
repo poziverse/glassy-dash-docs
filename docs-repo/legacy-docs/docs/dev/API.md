@@ -129,7 +129,7 @@ curl -X GET http://localhost:3000/api/auth/me \
 
 ## 📝 Notes API
 
-### List All Notes
+### List Notes
 
 **Endpoint**: `GET /api/notes`
 

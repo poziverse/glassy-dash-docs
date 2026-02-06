@@ -34,6 +34,34 @@ CREATE TABLE users (
 
 ---
 
+### documents
+
+Advanced document management with Tiptap editor support.
+
+```sql
+CREATE TABLE documents (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  color TEXT NOT NULL DEFAULT 'default',
+  pinned INTEGER NOT NULL DEFAULT 0,
+  is_template INTEGER NOT NULL DEFAULT 0,
+  is_public INTEGER NOT NULL DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  deleted_at DATETIME,
+  FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+```
+
+**Indexes:**
+- `user_id` - Fast user queries
+- `pinned` - Sorting by priority
+- `deleted_at` - Trash management
+
+---
+
 ### notes
 
 Primary notes table storing all note data.
@@ -212,10 +240,10 @@ CREATE TABLE note_views (
 - Added note_views table
 - Enabled real-time collaboration
 
-**v4 - Add Settings (2026-01-15)**
-- Created user_settings table
-- Created settings table
-- Added view_mode setting
+**v4 - Add Documents Color (2026-01-31)**
+- Created documents table
+- Added color column to documents
+- Integrated with Tiptap editor state
 
 **v5 - Add Soft Delete (2026-01-21)**
 - Added deleted_at column to notes table

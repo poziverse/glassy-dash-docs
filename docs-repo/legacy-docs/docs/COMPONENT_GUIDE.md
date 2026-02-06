@@ -87,6 +87,34 @@ import { AdminView } from "./components/AdminView";
 
 ---
 
+### DocsView
+
+Comprehensive document management view with folder organization and immersive editor.
+
+**Usage:**
+
+```jsx
+import { DocsView } from "./components/DocsView";
+<DocsView />;
+```
+
+**Features:**
+
+- Hierarchical folder navigation (`DocsSidebar`)
+- Grid and List view modes
+- Immersive full-page editor (`GlassyEditor`)
+- **Metadata Management**: Individual Pin, Color, and Transparency controls.
+- **Bulk Operations**: Multi-select documents for batch deletion, pinning, or colorization.
+- **Contextual Actions**: Right-click support for quick edits and categorization.
+
+**Recent Updates (v1.2):**
+
+- Added Toolbar controls for individual document Pin/Unpin status.
+- Integrated Color Picker and Transparency presets into the document editor.
+- Implemented bulk operations bar with batch Pin/Color support.
+
+---
+
 ## Layout Components
 
 ### DashboardLayout

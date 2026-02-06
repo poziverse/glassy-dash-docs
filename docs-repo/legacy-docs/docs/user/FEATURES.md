@@ -97,6 +97,27 @@ GLASSYDASH is a powerful, private, and feature-rich note-taking application with
 
 ---
 
+## 📄 Document Workspace
+
+### Dedicated Document Editing
+
+**Features:**
+- Full-page immersive editor (`GlassyEditor`)
+- Organization via hierarchical folder structure
+- Real-time auto-save with version indicators
+- Persistent sidebar for quick navigation
+
+### Personalization & Organization
+
+**Features:**
+- **Per-Document Coloring**: Categorize documents with the same 7 bioluminescent accent colors as notes.
+- **Pinning Support**: Keep critical documents at the top of your workspace.
+- **Custom Transparency**: Adjust transparency levels individually for each document to match your aesthetic preference (Solid to Airy).
+- **Bulk Actions**: Perform batch pinning, unpinning, and colorization for efficient organization.
+- **Context Menu**: Right-click cards for quick color changes and metadata management.
+
+---
+
 ## 🏷️ Tag System
 
 ### Tag Features
@@ -207,7 +228,7 @@ GLASSYDASH is a powerful, private, and feature-rich note-taking application with
 
 ### Quick Filters
 
-**All Notes**: Default view, shows everything
+**Notes**: Default view, shows everything
 
 **All Images**: Filter to notes containing images only
 

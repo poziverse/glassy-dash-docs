@@ -54,44 +54,31 @@ GLASSYDASH is a modern, full-featured notes application inspired by Google Keep,
 └──────────────────────────────────────────────────────────┘
 ```
 
-### Component Architecture
+## Navigation & Layout Architecture (v2.1)
 
-```
-App (Root)
-├── AuthProvider (Authentication Context)
-│   ├── AuthViews (Login/Register)
-│   └── Protected Routes
-│
-├── UIProvider (UI State)
-│   ├── Theme Management
-│   ├── Dark Mode
-│   └── View Mode (Grid/List)
-│
-├── NotesProvider (Notes State)
-│   ├── NotesView (Grid/List Display)
-│   │   ├── NoteCard (Individual Note)
-│   │   └── Bulk Operations
-│   ├── Modal (Note Editor)
-│   │   ├── FormatToolbar
-│   │   ├── DrawingCanvas
-│   │   ├── ChecklistRow
-│   │   └── Image Preview
-│   ├── Composer (Note Creator)
-│   └── Sidebar (Tags/Filters)
-│
-├── ModalProvider (Modal State)
-│   └── Modal Components
-│
-├── SettingsProvider (Settings State)
-│   └── SettingsPanel
-│
-├── AdminView (Admin Panel)
-│   └── User Management
-│
-└── SearchBar
-    ├── Text Search
-    └── AI Assistant (Llama 3.2)
-```
+The application uses a **Persistent Shell Architecture** to ensure instantaneous navigation and a smooth user experience.
+
+### Main Navigation Components
+- **Persistent Sidebar**: Located on the left, containing primary navigation items. It uses hash-based routing to switch between major views without re-rendering the layout.
+- **Top Bar**: Contains the page title, search bar, global tag filter, AI Assistant toggle, and user profile menu.
+- **Shell (`DashboardLayout`)**: Wraps all authenticated views. It pulls global state from Zustand stores (`uiStore`, `notesStore`, `authStore`) to remain synchronized across route changes.
+
+### Routing Logic
+Most sidebar items now map directly to hash routes for performance and deep-linking:
+- **All Notes**: `#/notes` (Default view)
+- **Documents**: `#/docs`
+- **Voice Studio**: `#/voice`
+- **All Tags**: `#/tags`
+- **Trash**: `#/trash`
+- **Health**: `#/health`
+- **Alerts**: `#/alerts`
+- **Admin Panel**: `#/admin` (Admin only)
+- **Settings**: `#/settings` (Full-page settings view)
+
+### Settings Context
+There are two ways to access settings:
+1. **Sidebar "Settings" Button**: Routes to `#/settings`, opening a full-page settings workspace (`SettingsView`).
+2. **User Profile "Settings" Menu**: Triggers a global overlay panel (`SettingsPanel`) that slides in from the right, allowing quick adjustments without leaving the current view.
 
 ---
 
@@ -147,7 +134,16 @@ App (Root)
 - Tag management
 - Bulk operations (multi-select)
 
-### 2. Collaboration
+### 2. Document Workspace
+
+**Features:**
+- Immersive full-page document editor
+- Hierarchical folder organization
+- Per-document color and pinning parity with notes
+- Customizable transparency levels for individual documents
+- Advanced bulk management (move, pin, color, delete)
+
+### 3. Collaboration
 
 **Features:**
 - Real-time collaboration on notes

@@ -2,25 +2,28 @@
 
 ## 1. Modular Architecture
 
-**React GlassKeep** operates on a fully modular, Context-driven architecture. The codebase has moved away from a monolithic structure to a separation of concerns between Routing, Views, Layouts, and State.
+**GlassyDash** operates on a modern, shell-based architecture using **Zustand** for global state and persistent layout components. The codebase uses a "Shell Architecture" where the main layout persists across route changes to provide instantaneous navigation.
 
 ### Core Structure
-- **Root Entry (`App.jsx`)**: Acts as a high-level router and provider shell. It listens to authentication state and hash routes to switch between top-level views (`NotesView`, `AdminView`, `LoginView`, `RegisterView`).
-- **`src/contexts/`**: Centralized state management.
-  - `AuthContext`: Authentication, session management (JWT), and user profiles.
-  - `NotesContext`: Note CRUD, search, filtering, and real-time SSE syncing.
-  - `ModalContext`: Complex state machine for note editor modal (formerly ~1000 lines of App code).
-  - `ComposerContext`: Logic for creating new notes.
-  - `UIContext`: Global UI shells (Toasts, Confirmation Dialogs).
-  - `SettingsContext`: User preferences (Theming, View Modes).
+- **Root Entry (`App.jsx`)**: Acts as the application shell and router. It wraps all authenticated routes in a persistent `DashboardLayout` to prevent re-renders of the sidebar and header during navigation.
+- **`src/stores/`**: Centralized state management using Zustand.
+  - `authStore`: Authentication, session management (JWT), and user profiles.
+  - `notesStore`: Note CRUD, search, filtering, and real-time SSE syncing.
+  - `docsStore`: Document management, Tiptap editor state, bulk actions, pinning, and coloring.
+  - `uiStore`: Global UI state including sidebar collapse, active page title, and header actions.
+  - `settingsStore`: User preferences (Theming, View Modes).
+  - `modalStore`: Complex state machine for note editor modal.
 
 - **`src/components/`**: 
-  - **Views**: Top-level route targets.
-    - `NotesView.jsx`: The main dashboard displaying note grids/lists.
-    - `AdminView.jsx`: User management and system stats.
-    - `AuthViews.jsx`: Login/Register forms.
+  - **Views**: Content components that render inside the shell.
+    - `NotesView.jsx`: The main notes dashboard.
+    - `AdminView.jsx`: System administration and metrics.
+    - `SettingsView.jsx`: Full-page settings interface (renders `SettingsPanel` inline).
+    - `TagsView.jsx`: Dedicated tag management workspace.
+    - `TrashView.jsx`: Deleted notes management.
   - **Layout**: 
-    - `DashboardLayout.jsx`: The application shell containing `Sidebar` and `SearchBar`.
+    - `DashboardLayout.jsx`: The persistent application shell containing `Sidebar`, `TopBar`, and `AiAssistant`. Pulls state directly from stores.
+    - `Sidebar.jsx`: Navigation component with collapsed/expanded states.
   - **Widgets**: `NoteCard.jsx`, `Composer.jsx`, `SettingsPanel.jsx`.
 
 - **`src/utils/`**: Pure utility functions for API calls, formatting, and image processing.
@@ -35,14 +38,15 @@
 
 ## 2. State Management & Persistence
 
-The application uses **React Context** as its primary state engine, with persistence layers for both `localStorage` and a remote SQLite backend.
+The application uses **Zustand** as its primary state engine, with specialized stores for different domains.
 
-### Context Flow
-1. **Providers**: Wrapped at the root in `main.jsx` via `RootProvider`.
-2. **Persistence**:
-   - `SettingsContext` persists themes and UI preferences to `localStorage`.
-   - `NotesContext` syncs note data with backend `/api/notes` with a local cache fallback.
-   - `AuthContext` manages JWT tokens in `localStorage`.
+### Core Stores
+1. **`uiStore`**: Manages layout state (sidebar collapse, navigation path) and global UI elements (toasts, confirmation dialogs).
+2. **`notesStore`**: Centralizes note data, filtering, and CRUD operations. Syncs with backend `/api/notes`.
+3. **`docsStore`**: Manages document data, pinning, coloring, and bulk operations. Optimized for large document sets.
+4. **`authStore`**: Manages user session, JWT tokens, and profile data. Persists to `localStorage`.
+5. **`settingsStore`**: Persists UI preferences and themes to `localStorage`.
+6. **`aiStore`**: Manages AI assistant state and metrics.
 
 ### Data Syncing (SSE)
 Real-time collaboration is handled via **Server-Sent Events (SSE)**.
@@ -280,7 +284,9 @@ src/
 │   ├── AuthViews.jsx
 │   ├── AdminView.jsx
 │   ├── NotesView.jsx
+│   ├── DocsView.jsx
 │   ├── NoteCard.jsx
+│   ├── DocCard.jsx
 │   ├── Composer.jsx
 │   ├── SettingsPanel.jsx
 │   ├── Modal.jsx

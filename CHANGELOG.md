@@ -75,7 +75,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 🔍 **Advanced Search**
   - Full-text search (title, content, tags, checklist, images)
   - AI-powered query assistance
-  - Quick filters (All Notes, All Images)
+  - Quick filters (Notes, All Images)
 
 - 💾 **Import/Export**
   - Export all notes to JSON

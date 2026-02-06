@@ -109,7 +109,7 @@ What did I learn yesterday?
 ```
 
 ### Quick Filters
-- **All Notes**: Default, shows everything
+- **Notes**: Default, shows everything
 - **All Images**: Filter to image-containing notes only
 
 ---

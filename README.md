@@ -23,20 +23,20 @@ GLASSYDASH is a powerful, private, and feature-rich note-taking application desi
 
 ### 🎯 Core Features
 
-| Feature | Description |
-|----------|-------------|
-| **📝 Rich Note Editing** | Markdown support, formatting, drawing tools, checklists |
-| **🤖 Private AI Assistant** | Local Llama 3.2 AI with RAG - 100% private |
-| **👥 Real-time Collaboration** | Work together on notes simultaneously |
-| **🔍 Advanced Search** | Full-text search with AI-powered question answering |
-| **🏷️ Smart Tagging** | Organize notes with tags and filters |
-| **✅ Interactive Checklists** | Task lists with drag-to-reorder |
-| **🎨 Advanced Theming** | Custom backgrounds, accent colors, transparency levels |
-| **💾 Import/Export** | Backup data, migrate from Google Keep |
-| **🔐 Secure Auth** | JWT-based authentication with secret key recovery |
-| **👨‍💼 Admin Panel** | User management and system monitoring |
+| Feature                        | Description                                             |
+| ------------------------------ | ------------------------------------------------------- |
+| **📝 Rich Note Editing**       | Markdown support, formatting, drawing tools, checklists |
+| **🤖 Private AI Assistant**    | Local Llama 3.2 AI with RAG - 100% private              |
+| **👥 Real-time Collaboration** | Work together on notes simultaneously                   |
+| **🔍 Advanced Search**         | Full-text search with AI-powered question answering     |
+| **🏷️ Smart Tagging**           | Organize notes with tags and filters                    |
+| **✅ Interactive Checklists**  | Task lists with drag-to-reorder                         |
+| **🎨 Advanced Theming**        | Custom backgrounds, accent colors, transparency levels  |
+| **💾 Import/Export**           | Backup data, migrate from Google Keep                   |
+| **🔐 Secure Auth**             | JWT-based authentication with secret key recovery       |
+| **👨‍💼 Admin Panel**             | User management and system monitoring                   |
 
-### 🚀 Why GLASSYDASH?
+### 🚀 Why glassy?
 
 - **🔒 Privacy First**: Your data stays on your server. No cloud dependency.
 - **⚡ Lightning Fast**: Built with React 18 and Vite for optimal performance.
@@ -119,31 +119,34 @@ npm start
 ## 🛠 Technology Stack
 
 ### Frontend
-| Technology | Purpose |
-|------------|---------|
-| [React 18](https://reactjs.org/) | UI Framework |
-| [Vite 5](https://vitejs.dev/) | Build Tool & Dev Server |
-| [Tailwind CSS 4](https://tailwindcss.com/) | Styling |
-| [React Router 6](https://reactrouter.com/) | Client-side Routing |
+
+| Technology                                   | Purpose                 |
+| -------------------------------------------- | ----------------------- |
+| [React 18](https://reactjs.org/)             | UI Framework            |
+| [Vite 5](https://vitejs.dev/)                | Build Tool & Dev Server |
+| [Tailwind CSS 4](https://tailwindcss.com/)   | Styling                 |
+| [React Router 6](https://reactrouter.com/)   | Client-side Routing     |
 | [TanStack Query](https://tanstack.com/query) | Data Fetching & Caching |
-| [Lucide React](https://lucide.dev/) | Icons |
-| [Marked](https://marked.js.org/) | Markdown Parsing |
+| [Lucide React](https://lucide.dev/)          | Icons                   |
+| [Marked](https://marked.js.org/)             | Markdown Parsing        |
 
 ### Backend
-| Technology | Purpose |
-|------------|---------|
-| [Node.js 18+](https://nodejs.org/) | Runtime |
-| [Express.js 4](https://expressjs.com/) | Web Framework |
-| [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) | Database |
-| [JWT](https://jwt.io/) | Authentication |
-| [Ollama](https://ollama.ai/) | Local Llama 3.2 AI |
+
+| Technology                                                   | Purpose            |
+| ------------------------------------------------------------ | ------------------ |
+| [Node.js 18+](https://nodejs.org/)                           | Runtime            |
+| [Express.js 4](https://expressjs.com/)                       | Web Framework      |
+| [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) | Database           |
+| [JWT](https://jwt.io/)                                       | Authentication     |
+| [Ollama](https://ollama.ai/)                                 | Local Llama 3.2 AI |
 
 ### DevOps
-| Technology | Purpose |
-|------------|---------|
-| [Docker](https://www.docker.com/) | Containerization |
-| [Docker Compose](https://docs.docker.com/compose/) | Multi-container Orchestration |
-| [GitHub Actions](https://github.com/features/actions) | CI/CD |
+
+| Technology                                            | Purpose                       |
+| ----------------------------------------------------- | ----------------------------- |
+| [Docker](https://www.docker.com/)                     | Containerization              |
+| [Docker Compose](https://docs.docker.com/compose/)    | Multi-container Orchestration |
+| [GitHub Actions](https://github.com/features/actions) | CI/CD                         |
 
 ---
 
@@ -152,18 +155,21 @@ npm start
 Comprehensive documentation is available for users, developers, and admins.
 
 ### 👤 For Users
+
 - [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
 - [User Guide](GLASSYDASH/docs/user/GETTING_STARTED.md) - Learn all features
 - [Features Overview](GLASSYDASH/docs/user/FEATURES.md) - Discover capabilities
 - [FAQ](GLASSYDASH/docs/user/FAQ.md) - Common questions
 
 ### 💻 For Developers
+
 - [Developer Setup](GLASSYDASH/docs/dev/SETUP.md) - Development environment
 - [Architecture](GLASSYDASH/docs/dev/ARCHITECTURE.md) - System design
 - [API Documentation](GLASSYDASH/docs/api/README.md) - API reference
 - [Contributing Guide](CONTRIBUTING.md) - How to contribute
 
 ### 👨‍💼 For Admins
+
 - [Admin Guide](GLASSYDASH/docs/admin/INSTALLATION.md) - Admin setup
 - [Configuration](GLASSYDASH/docs/admin/CONFIGURATION.md) - System config
 - [Security](GLASSYDASH/docs/admin/SECURITY.md) - Security best practices
@@ -176,6 +182,7 @@ Comprehensive documentation is available for users, developers, and admins.
 ## 🌟 Highlights
 
 ### 🤖 Private AI Assistant
+
 GLASSYDASH includes a fully private AI assistant powered by Llama 3.2 (1B):
 
 - **100% Local**: Runs entirely on your server. No data leaves your hardware.
@@ -184,11 +191,13 @@ GLASSYDASH includes a fully private AI assistant powered by Llama 3.2 (1B):
 - **Privacy First**: Your notes never leave your device.
 
 **Example Queries:**
+
 - "What are my AWS commands?"
 - "How old am I?"
 - "Show me all notes about project X"
 
 ### 👥 Real-time Collaboration
+
 Work together seamlessly:
 
 - **Live Editing**: Multiple users can edit notes simultaneously
@@ -197,6 +206,7 @@ Work together seamlessly:
 - **Conflict Resolution**: Automatic resolution of concurrent edits
 
 ### 🎨 Advanced Theming
+
 Customize your workspace:
 
 - **Theme Presets**: One-click themes (Neon Tokyo, Zen Garden, etc.)
@@ -324,6 +334,7 @@ We welcome contributions! Please follow these steps:
 7. 🚀 Submit a pull request
 
 ### Good First Issues
+
 [![Good First Issues](https://img.shields.io/badge/good%20first%20issues-5-brightgreen.svg)](https://github.com/yourusername/glassy-dash/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 
 Start with issues labeled [good first issue](https://github.com/yourusername/glassy-dash/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)!
@@ -332,33 +343,36 @@ Start with issues labeled [good first issue](https://github.com/yourusername/gla
 
 ## 📊 Comparison
 
-| Feature | GLASSYDASH | Google Keep | Notion |
-|----------|--------------|--------------|---------|
-| Private AI | ✅ Local | ❌ Cloud | ❌ Cloud |
-| Real-time Collab | ✅ | ❌ | ✅ |
-| Self-Hosted | ✅ | ❌ | ❌ |
-| Open Source | ✅ | ❌ | ❌ |
-| Drawing Notes | ✅ | ❌ | ❌ |
-| Advanced Theming | ✅ | ❌ | ✅ |
-| Import/Export | ✅ | ✅ | ✅ |
-| Free Forever | ✅ | ✅ | ❌ |
-| Offline Mode | ✅ | ✅ | ✅ |
+| Feature          | glassy   | Google Keep | Notion   |
+| ---------------- | -------- | ----------- | -------- |
+| Private AI       | ✅ Local | ❌ Cloud    | ❌ Cloud |
+| Real-time Collab | ✅       | ❌          | ✅       |
+| Self-Hosted      | ✅       | ❌          | ❌       |
+| Open Source      | ✅       | ❌          | ❌       |
+| Drawing Notes    | ✅       | ❌          | ❌       |
+| Advanced Theming | ✅       | ❌          | ✅       |
+| Import/Export    | ✅       | ✅          | ✅       |
+| Free Forever     | ✅       | ✅          | ❌       |
+| Offline Mode     | ✅       | ✅          | ✅       |
 
 ---
 
 ## 🗺️ Roadmap
 
 ### v0.68 (February 2026)
+
 - [ ] Enhanced AI with larger models
 - [ ] Improved mobile experience
 - [ ] Advanced search filters
 
 ### v0.70 (March 2026)
+
 - [ ] Plugin system
 - [ ] Multi-language support
 - [ ] Enhanced collaboration features
 
 ### v1.0.0 (Q2 2026)
+
 - [ ] Mobile app (React Native)
 - [ ] Enterprise features
 - [ ] API v2 with breaking changes
@@ -374,9 +388,11 @@ Thank you to all our sponsors! ❤️
 [![Sponsors](https://opencollective.com/glassy-dash/tiers/sponsor/badge.svg?label=sponsors&width=600)](https://opencollective.com/glassy-dash)
 
 ### Diamond Sponsors
+
 - [Your Company](https://github.com/sponsors) - Become a sponsor!
 
 ### Gold Sponsors
+
 - [Your Name](https://github.com/sponsors) - Become a sponsor!
 
 [Become a Sponsor](https://github.com/sponsors/yourusername) ❤️
@@ -425,9 +441,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 <div align="center">
 
-**GLASSYDASH** - Modern note-taking, simplified.
+**glassy** - Modern note-taking, simplified.
 
-Made with ❤️ by the GLASSYDASH Team
+Made with ❤️ by the glassy Team
 
 [⭐ Star us on GitHub](https://github.com/yourusername/glassy-dash) • [🐛 Report Issues](https://github.com/yourusername/glassy-dash/issues) • [💡 Feature Requests](https://github.com/yourusername/glassy-dash/issues)
 

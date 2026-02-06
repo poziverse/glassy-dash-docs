@@ -154,7 +154,7 @@ const tagLabel =
 // Dashboard title based on section
 const dashboardTitle =
   activeSection === 'overview'
-    ? tagLabel || 'All Notes'
+    ? tagLabel || 'Notes'
     : activeSection.charAt(0).toUpperCase() + activeSection.slice(1).replace('-', ' ')
 
 // Current background object

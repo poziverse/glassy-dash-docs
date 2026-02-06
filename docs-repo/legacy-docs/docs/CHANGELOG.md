@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.68.0] - 2026-02-04
+### Added
+- 📄 **Document Workspace Parity**
+  - Integrated individual **Pin/Unpin** functionality into the document editor.
+  - Added **Color Picker** to the document editor toolbar with theme-aware solid background previews.
+  - Implemented **Transparency Control** for documents, allowing per-document glassmorphism levels (Solid to Airy).
+  - Enhanced **Bulk Actions Bar** for documents with support for bulk pinning, unpinning, and colorization.
+  - Added color selection grid to the document card context menu for quick categorization.
+  - Refined document sorting to prioritize pinned documents at the top of grid/list views.
+  - Integrated document-specific transparency settings into the editor background rendering.
+
+### Fixed
+- 🔍 Fixed search bar input accidentally removed during layout updates in `DocsView.jsx`.
+- 🎨 Synchronized document card background logic with `modalBgFor` for better visual consistency.
+
 ## [Unreleased]
 
 ### Added
@@ -77,7 +92,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 🔍 **Advanced Search**
   - Full-text search (title, content, tags, checklist, images)
   - AI-powered query assistance
-  - Quick filters (All Notes, All Images)
+  - Quick filters (Notes, All Images)
 
 - 💾 **Import/Export**
   - Export all notes to JSON

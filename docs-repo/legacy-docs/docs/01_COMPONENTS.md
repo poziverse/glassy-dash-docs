@@ -128,7 +128,34 @@ App (Root)
 
 ---
 
-### 5. Note Editing Components
+### 5. Document Workspace Components
+
+#### DocsView
+**Purpose:** Comprehensive document management interface.
+
+**Key Responsibilities:**
+- Document grid/list rendering
+- Folder-based organization
+- Full-page document editor integration
+- Individual document metadata (Pin, Color, Transparency)
+- Bulk operations toolbar
+- Context menu for quick actions
+
+**File:** `GLASSYDASH/src/components/DocsView.jsx`
+
+#### DocsSidebar
+**Purpose:** Hierarchical folder navigation for documents.
+
+**Key Responsibilities:**
+- Folder tree rendering
+- Folder CRUD (Create, Rename, Delete)
+- Active folder state management
+
+**File:** `GLASSYDASH/src/components/DocsSidebar.jsx`
+
+---
+
+### 6. Note Editing Components
 
 #### Modal
 **Purpose:** Modal dialog for viewing and editing notes

@@ -65,26 +65,25 @@ GLASSYDASH is a **modern full-stack web application** built with:
 │                   Client Browser                        │
 │  ┌──────────────────────────────────────────────┐  │
 │  │          React Frontend (Vite)             │  │
-│  │  - Components                             │  │
-│  │  - Contexts (State Management)            │  │
+│  │  - Components (Shell Architecture)          │  │
+│  │  - Zustand Stores (State Management)        │  │
 │  │  - Hooks                                 │  │
 │  │  - Utils                                 │  │
 │  └──────────────────────────────────────────────┘  │
-│           │ HTTP/WebSocket                      │
+│           │ HTTP / SSE                          │
 │           ▼                                     │
 │  ┌──────────────────────────────────────────────┐  │
 │  │      Express.js Server                      │  │
 │  │  - REST API Routes                       │  │
-│  │  - WebSocket Server                       │  │
-│  │  - Middleware (Auth, CORS, etc.)        │  │
+│  │  - SSE Server (Real-time Events)          │  │
+│  │  - Middleware (Auth, Security, Logging)    │  │
 │  └──────────────────────────────────────────────┘  │
 │           │                                   │
 │           ▼                                   │
 │  ┌──────────────────────────────────────────────┐  │
 │  │        SQLite Database                      │  │
-│  │  - Notes Table                          │  │
-│  │  - Users Table                          │  │
-│  │  - Tags Table                           │  │
+│  │  - Notes, Users, Tags, Checklist Items   │  │
+│  │  - Collaborators, Images                 │  │
 │  └──────────────────────────────────────────────┘  │
 │                                                 │
 │           ┌───────────────────────────────────────┐  │
@@ -98,86 +97,49 @@ GLASSYDASH is a **modern full-stack web application** built with:
 
 ## 🔌 Frontend Architecture
 
-### Component Hierarchy
+### Component Hierarchy & Navigation
+
+The application uses a **Single Page Application (SPA) Shell** pattern. The root `App.jsx` persists the `DashboardLayout` across route changes, ensuring that common UI elements like the sidebar and header do not re-render.
 
 ```
-App.jsx
-├── ErrorBoundary
-├── AuthProvider
-│   └── AuthContext
-├── NotesProvider
-│   └── NotesContext
-├── SettingsProvider
-│   └── SettingsContext
-├── UIProvider
-│   └── UIContext
-├── ComposerProvider
-│   └── ComposerContext
-└── ModalProvider
-    └── ModalContext
-
-Main Components:
-├── DashboardLayout
-├── Sidebar
-├── NotesView
-├── NoteCard
-├── Composer
-├── SearchBar
-├── SettingsPanel
-└── Modal
+App.jsx (Router & Shell)
+└── DashboardLayout (Persistent Shell)
+    ├── Sidebar (Navigation & Tag Filter)
+    ├── TopBar (Title, Search, AI Toggle)
+    └── Main Content (Swappable Views)
+        ├── NotesView (Default)
+        ├── AdminView
+        ├── SettingsView
+        ├── TagsView
+        ├── TrashView
+        ├── DocsView
+        └── VoiceWorkspace
 ```
 
 ### State Management
 
-**Context API Pattern**:
-```javascript
-// AuthContext
-const AuthContext = createContext();
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-  
-  // Login, logout, refresh token logic
-  
-  return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-```
+**Zustand Stores**:
+The application has migrated from React Context to **Zustand** for better performance and simpler state access.
 
-**Benefits**:
-- Clean separation of concerns
-- Easy testing with mocks
-- Type-safe with TypeScript
-- Centralized state logic
-
-### Key Components
-
-**DashboardLayout**:
-- Main layout wrapper
-- Sidebar navigation
-- Note display area
-- Search bar integration
-- Responsive design
-
-**NotesView**:
-- Virtualized list (react-window)
-- Efficient rendering of 1000+ notes
-- Search and filter integration
-- Sorting and pagination
-
-**Composer**:
-- Note creation/editing
-- Rich text editor
-- Drawing canvas
-- Checklist management
-- Image upload
+- **`uiStore`**: Manages sidebar state, page titles, and global UI actions.
+- **`notesStore`**: Manages note data, filtering, and real-time synchronization.
+- **`authStore`**: Handles user authentication and persistence.
+- **`settingsStore`**: Manages theming and UI preferences.
+- **`aiStore`**: Tracks AI assistant state and history.
 
 ---
 
-## 🔙 Backend Architecture
+## 🔄 Real-time Architecture
+
+### Server-Sent Events (SSE) Implementation
+
+Real-time updates are handled via **SSE** instead of WebSockets for better efficiency and simplicity over HTTP/1.1 and HTTP/2.
+
+**Server-Side**:
+The server maintains a stream of events at `/api/events`. When a note is updated, it broadcasts a `note_updated` event to all relevant clients.
+
+**Client-Side**:
+The `useCollaboration` hook (used by `notesStore`) listens for events and triggers selective data re-fetching or optimistic UI updates.
 
 ### API Structure
 

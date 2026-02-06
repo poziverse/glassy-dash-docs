@@ -144,7 +144,7 @@ Access at: http://localhost:5173
 **Search Features**
 - **Full-text search**: Searches title, content, tags, checklists, images
 - **AI-powered**: Ask questions naturally
-- **Quick filters**: "All Notes", "All Images"
+- **Quick filters**: "Notes", "All Images"
 - **Keyboard shortcut**: `Ctrl+K` / `Cmd+K`
 
 **Search Examples**
@@ -264,7 +264,7 @@ Access at: http://localhost:5173
 
 ### Backing Up Your Data
 
-**Export All Notes**
+**Export Notes**
 1. Settings → Export
 2. Choose export format:
    - JSON (full backup)

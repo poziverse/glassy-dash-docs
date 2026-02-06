@@ -476,6 +476,112 @@ Same as `/import`
 
 ---
 
+## Documents
+
+### Base URL
+
+```
+/api/documents
+```
+
+### GET `/`
+
+Get all documents for the authenticated user.
+
+**Authentication:** Required
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "id": "doc-123",
+    "user_id": 1,
+    "title": "Project Proposal",
+    "content": "<h1>Introduction</h1>...",
+    "color": "sky",
+    "pinned": true,
+    "created_at": "2026-02-01T10:00:00Z",
+    "updated_at": "2026-02-04T12:00:00Z"
+  }
+]
+```
+
+---
+
+### POST `/`
+
+Create a new document.
+
+**Authentication:** Required
+
+**Request Body:**
+
+```json
+{
+  "title": "Untitled Document",
+  "content": "",
+  "color": "default",
+  "pinned": false
+}
+```
+
+---
+
+### PATCH `/:id`
+
+Partial update of a document.
+
+**Authentication:** Required
+
+**Request Body (any subset):**
+
+```json
+{
+  "title": "Updated Title",
+  "color": "mauve",
+  "pinned": true
+}
+```
+
+---
+
+### DELETE `/:id`
+
+Delete a document.
+
+---
+
+### POST `/bulk-pin`
+
+Pin multiple documents at once.
+
+**Request Body:**
+
+```json
+{
+  "ids": ["doc-1", "doc-2"],
+  "pinned": true
+}
+```
+
+---
+
+### POST `/bulk-color`
+
+Color multiple documents at once.
+
+**Request Body:**
+
+```json
+{
+  "ids": ["doc-1", "doc-2"],
+  "color": "sage"
+}
+```
+
+---
+
 ## Collaboration
 
 ### Base URL

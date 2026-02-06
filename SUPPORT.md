@@ -292,4 +292,4 @@ To everyone who contributes, reports issues, helps others, or sponsors GLASSYDAS
 
 ---
 
-**GLASSYDASH v0.67 (Beta)** | [Homepage](https://github.com/yourusername/glassy-dash) | [Report Issue](https://github.com/yourusername/glassy-dash/issues)
+**GLASSYDASH v1.1.6** | [Homepage](https://github.com/yourusername/glassy-dash) | [Report Issue](https://github.com/yourusername/glassy-dash/issues)
